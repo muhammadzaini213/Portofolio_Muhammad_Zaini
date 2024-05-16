@@ -1,0 +1,105 @@
+#stories{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Radley';
+    text-align: center;
+}
+
+#universe-title{
+    font-size: 4rem;
+    margin: 0;
+    margin-top: 6rem;
+}
+
+#universe-synopsis{
+    font-size: 1.5rem;
+    max-width: 800px;
+}
+
+#stories-div{
+    display: flex;
+    flex-direction: row;
+}
+
+.stories-container{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+}
+
+.stories-title{
+    font-size: 1.7rem;
+    margin: 0;
+}
+
+.stories-synopsis{
+    font-size: 1.1rem;
+    max-width: calc(100vw/3.5);
+    margin-top: 1rem;
+}
+
+.stories-read{
+    font-size: 0.7rem;
+    margin: 0;
+    color: white;
+}
+
+
+/* Mobile */
+@media only screen and (max-width : 481px) {
+    #stories{
+        height: 110vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Radley';
+        text-align: center;
+    }
+
+    
+    #universe-title{
+        font-size: 300%;
+        margin: 0;
+        margin-top: 10%;
+    }
+    
+    #universe-synopsis{
+        font-size: 100%;
+        margin: 10%;
+    }
+    
+    #stories-div{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .stories-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0rem;
+    }
+    
+    .stories-title{
+        font-size: 1.7rem;
+        margin: 0;
+        margin-top: 4%;
+    }
+    
+    .stories-synopsis{
+        font-size: 100%;
+        max-width: 90%;
+        margin-top: 1%;
+    }
+    
+    .stories-read{
+        font-size: 70%;
+        margin: 0;
+        color: white;
+    }
+    
+}

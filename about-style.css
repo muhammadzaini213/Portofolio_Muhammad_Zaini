@@ -1,0 +1,73 @@
+#about{
+    height: 100vh;
+    position: relative;
+    font-family: 'Radley', sans-serif;
+    font-style: italic;
+    display: flex;
+}
+
+#about-div{
+    width: 50%;
+    padding-top: 10rem;
+    padding-left: 5vw;
+}
+
+#about-title{
+    font-size: 4rem;
+    text-align: center;
+    margin: 0;
+}
+
+
+#about-desc{
+    padding-top: 3rem;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+#android-img{
+    padding-top: 5rem;
+}
+
+/* Mobile */
+@media only screen and (max-width : 481px) {
+    #about{
+        height: 100vh;
+        position: relative;
+        font-family: 'Radley', sans-serif;
+        font-style: italic;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #about-div{
+        margin: 0;
+        width: 90%;
+        padding-top: 0%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    
+    #about-title{
+        font-size: 300%;
+        text-align: center;
+        margin: 0;
+    }
+    
+    
+    #about-desc{
+        font-size: 120%;
+        text-align: center;
+        margin: 0;
+        padding-top: 5%;
+    }
+    
+    #android-img{
+        width: 200px;
+        height: 200px;
+        margin: 0;
+        padding: 0%;
+    }
+}

@@ -1,0 +1,96 @@
+@font-face {
+    font-family: 'BrightSunshine';
+    src: url('fonts/bright-sunshine-demo.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RadleyItalic';
+    src: url('fonts/Radley-Italic.ttf') format('truetype');
+}
+
+
+.radley-regular-italic {
+    font-family: "Radley", serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+body{
+    background-color: #191919;
+    color: white;
+}
+
+nav{
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    background-color: white;
+    color: #191919;
+    z-index: 9999;
+}
+
+#nav-title{
+    width: 40vw;
+    text-align: center;
+    font-family: 'BrightSunshine', sans-serif;
+    font-size: 3rem;
+    margin: 1rem;
+}
+
+#nav-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55vw;
+    float: right;
+}
+
+.nav-link{
+    position: relative;
+    text-decoration: none;
+    font-size: 1.7rem;
+    font-family: 'Radley', sans-serif;
+    text-align: center;
+    color: #191919;
+    flex: 1;
+}
+
+/* Mobile */
+@media only screen and (max-width : 481px){
+    nav{
+        display: flex;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        background-color: white;
+        color: #191919;
+        z-index: 9999;
+    }
+    
+    #nav-title{
+        width: 35%;
+        text-align: center;
+        font-family: 'BrightSunshine', sans-serif;
+        font-size: 140%;
+        margin: 3%;
+    }
+    
+    #nav-div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 53%;
+        float: right;
+    }
+    
+    .nav-link{
+        position: relative;
+        text-decoration: none;
+        font-size: 70%;
+        font-family: 'Radley', sans-serif;
+        color: #191919;
+        flex: 1;
+    }
+    
+}

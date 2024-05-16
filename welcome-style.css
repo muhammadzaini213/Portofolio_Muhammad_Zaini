@@ -1,0 +1,98 @@
+.main-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#welcome {
+    height: 100vh;
+    position: relative;
+    font-family: 'Radley', sans-serif;
+    font-style: italic;
+}
+
+
+#welcome-div {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+    -webkit-transform: translate(-50%, -45%);
+    -moz-transform: translate(-50%, -45%);
+    -ms-transform: translate(-50%, -45%);
+    -o-transform: translate(-50%, -45%);
+}
+
+#welcome-text {
+    font-size: 5rem;
+    margin: 0;
+}
+
+#description-text {
+    font-size: 2rem;
+    margin: 0;
+}
+
+#recruit-div {
+    font-size: 1.2rem;
+    text-align: center;
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    margin: 0;
+    transform: translate(-50%, -30%);
+    -webkit-transform: translate(-50%, -30%);
+    -moz-transform: translate(-50%, -30%);
+    -ms-transform: translate(-50%, -30%);
+    -o-transform: translate(-50%, -30%);
+}
+
+#recruit {
+    color: white;
+    font-size: 1.3rem;
+    text-decoration: underline;
+}
+
+
+/* Mobile */
+@media only screen and (max-width : 481px) {
+    #welcome-div {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -45%);
+        -webkit-transform: translate(-50%, -45%);
+        -moz-transform: translate(-50%, -45%);
+        -ms-transform: translate(-50%, -45%);
+        -o-transform: translate(-50%, -45%);
+    }
+
+    #welcome-text {
+        font-size: 300%;
+        width: 400px;
+    }
+
+    #description-text {
+        font-size: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    #recruit-div {
+        text-align: center;
+        position: absolute;
+        bottom: 15%;
+        left: 50%;
+        margin: 0;
+        transform: translate(-50%, -30%);
+        -webkit-transform: translate(-50%, -30%);
+        -moz-transform: translate(-50%, -30%);
+        -ms-transform: translate(-50%, -30%);
+        -o-transform: translate(-50%, -30%);
+    }
+
+    #recruit {
+        font-size: 60%;
+    }
+
+}

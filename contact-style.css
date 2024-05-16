@@ -1,0 +1,82 @@
+#contact {
+    height: 100vh;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Radley', sans-serif;
+    font-style: italic;
+}
+
+#contact-div {
+    text-align: center;
+    margin-top: 6rem;
+}
+
+#find-me {
+    font-size: 4.5rem;
+    text-align: center;
+    margin: 0;
+}
+
+#my-contact {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-icon {
+    max-width: 3rem;
+    max-height: 3rem;
+    margin-right: 1rem;
+}
+
+.contact-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.profile-link {
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+
+/* Mobile */
+@media only screen and (max-width : 481px) {
+    #contact-div {
+        text-align: center;
+        margin-top: 0rem;
+    }
+    
+    #find-me {
+        font-size: 300%;
+        text-align: center;
+        margin: 0;
+    }
+    
+    #my-contact {
+        margin-top: 10%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .contact-icon {
+        max-width: 30px;
+        max-height: 30px;
+        margin-right: 1rem;
+    }
+    
+    .contact-container {
+        padding: 4%;
+    }
+    
+    .profile-link {
+        color: white;
+        text-decoration: none;
+        font-size: 100%;
+    }
+}
