@@ -44,43 +44,6 @@
     font-size: 2rem;
 }
 
-
-/* Mobile */
-@media only screen and (max-width : 481px) {
-    #contact-div {
-        text-align: center;
-        margin-top: 0rem;
-    }
-    
-    #find-me {
-        font-size: 300%;
-        text-align: center;
-        margin: 0;
-    }
-    
-    #my-contact {
-        margin-top: 10%;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .contact-icon {
-        max-width: 30px;
-        max-height: 30px;
-        margin-right: 1rem;
-    }
-    
-    .contact-container {
-        padding: 4%;
-    }
-    
-    .profile-link {
-        color: white;
-        text-decoration: none;
-        font-size: 100%;
-    }
-}
-
 /* Bigger Mobile */
 @media only screen and (max-width : 767px) {
     #contact-div {
@@ -116,3 +79,40 @@
         font-size: 100%;
     }
 }
+
+/* Mobile */
+@media only screen and (max-width : 501px) {
+    #contact-div {
+        text-align: center;
+        margin-top: 0rem;
+    }
+    
+    #find-me {
+        font-size: 300%;
+        text-align: center;
+        margin: 0;
+    }
+    
+    #my-contact {
+        margin-top: 10%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .contact-icon {
+        max-width: 30px;
+        max-height: 30px;
+        margin-right: 1rem;
+    }
+    
+    .contact-container {
+        padding: 4%;
+    }
+    
+    .profile-link {
+        color: white;
+        text-decoration: none;
+        font-size: 100%;
+    }
+}
+
