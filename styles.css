@@ -18,6 +18,8 @@
 body{
     background-color: #191919;
     color: white;
+    margin: 0;
+    padding: 0;
 }
 
 nav{
@@ -25,6 +27,7 @@ nav{
     position: fixed;
     width: 100vw;
     top: 0;
+    margin: 0;
     background-color: white;
     color: #191919;
     z-index: 9999;
@@ -63,6 +66,9 @@ nav{
         position: fixed;
         width: 100%;
         top: 0;
+        left: 0;
+        top: 0;
+        margin: 0;
         background-color: white;
         color: #191919;
         z-index: 9999;
@@ -72,7 +78,7 @@ nav{
         width: 35%;
         text-align: center;
         font-family: 'BrightSunshine', sans-serif;
-        font-size: 140%;
+        font-size: 120%;
         margin: 3%;
     }
     
