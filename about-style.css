@@ -4,11 +4,12 @@
     font-family: 'Radley', sans-serif;
     font-style: italic;
     display: flex;
+    padding-top: 0%
 }
 
 #about-div{
     width: 50%;
-    padding-top: 10rem;
+    padding-top: 8rem;
     padding-left: 5vw;
 }
 
