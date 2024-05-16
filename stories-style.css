@@ -103,3 +103,61 @@
     }
     
 }
+
+/* Bigger Mobile */
+@media only screen and (max-width : 767px) {
+    #stories{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Radley';
+        text-align: center;
+    }
+
+    
+    #universe-title{
+        font-size: 250%;
+        margin: 0;
+        margin-top: 7%;
+    }
+    
+    #universe-synopsis{
+        font-size: 100%;
+        margin: 2%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    
+    #stories-div{
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .stories-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0rem;
+    }
+    
+    .stories-title{
+        font-size: 1.7rem;
+        margin: 0;
+        margin-top: 4%;
+    }
+    
+    .stories-synopsis{
+        font-size: 80%;
+        max-width: 90%;
+        margin-top: 1%;
+    }
+    
+    .stories-read{
+        font-size: 70%;
+        margin: 0;
+        color: white;
+    }
+    
+}
