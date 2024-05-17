@@ -109,13 +109,14 @@
 /* Mobile */
 @media only screen and (max-width : 501px) {
     #stories{
-        height: 115vh;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         font-family: 'Radley';
         text-align: center;
+        padding-top: 12%;
     }
 
     
