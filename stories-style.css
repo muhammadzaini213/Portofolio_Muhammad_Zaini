@@ -116,14 +116,15 @@
         justify-content: center;
         font-family: 'Radley';
         text-align: center;
-        padding-top: 12%;
+        padding-top: 0%;
+        margin-top: 0;
     }
 
     
     #universe-title{
         font-size: 250%;
         margin: 0;
-        margin-top: 15%;
+        margin-top: 5%;
     }
     
     #universe-synopsis{
