@@ -47,7 +47,7 @@
     #about-div{
         margin: 0;
         width: 50%;
-        padding-top: 0%;
+        padding-top: 2%;
         padding-left: 5%;
         padding-right: 5%;
     }
@@ -92,23 +92,23 @@
     #about-div{
         margin: 0;
         width: 90%;
-        padding-top: 0%;
+        padding-top: 2%;
         padding-left: 5%;
         padding-right: 5%;
     }
     
     #about-title{
-        font-size: 300%;
+        font-size: 250%;
         text-align: center;
         margin: 0;
     }
     
     
     #about-desc{
-        font-size: 120%;
+        font-size: 100%;
         text-align: center;
         margin: 0;
-        padding-top: 5%;
+        padding-top: 2%;
     }
     
     #android-img{
@@ -116,6 +116,7 @@
         height: 200px;
         margin: 0;
         padding: 0%;
+        padding-top:3%;
     }
 }
 

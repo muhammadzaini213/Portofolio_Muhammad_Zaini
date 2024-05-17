@@ -49,7 +49,7 @@
 
 
 /* Bigger Mobile */
-@media only screen and (max-width : 7px) {
+@media only screen and (max-width : 767px) {
     #stories{
         height: 100vh;
         display: flex;
@@ -109,7 +109,7 @@
 /* Mobile */
 @media only screen and (max-width : 501px) {
     #stories{
-        height: 110vh;
+        height: 115vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -120,15 +120,16 @@
 
     
     #universe-title{
-        font-size: 300%;
+        font-size: 250%;
         margin: 0;
-        margin-top: 0%;
+        margin-top: 15%;
     }
     
     #universe-synopsis{
         font-size: 100%;
         margin: 10%;
         margin-top: 5%;
+        margin-bottom: 5%;
     }
     
     #stories-div{
@@ -150,7 +151,7 @@
     }
     
     .stories-synopsis{
-        font-size: 100%;
+        font-size: 80%;
         max-width: 90%;
         margin-top: 1%;
     }
