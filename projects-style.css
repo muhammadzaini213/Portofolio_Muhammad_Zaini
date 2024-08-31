@@ -121,7 +121,11 @@
         align-items: center;
         background-color: #696969;
     }
-    
+
+   .project-img{
+        width: calc(100vw/1.3);
+        height: calc(100vw/3.6);
+    }    
     .project-title{
         font-family: 'Radley';
         padding: 0.5rem;
