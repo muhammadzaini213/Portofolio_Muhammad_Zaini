@@ -8,15 +8,18 @@ export function About() {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.8, ease: "easeOut" }
+    transition: {
+      duration: 0.8,
+      ease: "easeOut" as const // Tambahkan 'as const' di sini
+    }
   };
 
   return (
     <section id="about" className="max-w-7xl mx-auto px-6 pb-32 pt-10">
       <div className="flex flex-col md:flex-row items-center gap-10 md:gap-20">
-        
+
         {/* Gambar Profil dengan Efek Float */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -36,24 +39,24 @@ export function About() {
 
         {/* Konten Teks */}
         <div className="text-center md:text-left flex-1">
-          <motion.h2 
+          <motion.h2
             {...fadeInUp}
             className="text-[#fed001] font-mono font-bold uppercase tracking-widest text-sm mb-4"
           >
             About Me
           </motion.h2>
 
-          <motion.p 
+          <motion.p
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
             className="text-white/90 text-lg md:text-xl leading-relaxed mb-8"
           >
-            I focus on designing gameplay systems that are modular, reusable, 
-            and easy to expand. My work centers around <span className="text-[#fed001]">AI behavior</span> (FSM, HFSM, GOAP), 
+            I focus on designing gameplay systems that are modular, reusable,
+            and easy to expand. My work centers around <span className="text-[#fed001]">AI behavior</span> (FSM, HFSM, GOAP),
             performance optimization, and building clean technical structures.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.4 }}
             className="bg-white/5 border-l-4 border-[#fed001] p-6 rounded-r-2xl"
