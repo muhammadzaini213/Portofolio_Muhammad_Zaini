@@ -3,7 +3,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 
+export async function generateStaticParams() {
+  return articles.map((article) => ({
+    slug: article.slug,
+  }));
+}
+
 export default async function ArticleDetail({ params }: { params: Promise<{ slug: string }> }) {
+  
   const { slug } = await params;
   const article = articles.find(a => a.slug === slug);
 
