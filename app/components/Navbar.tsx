@@ -94,7 +94,7 @@ export function Navbar() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden bg-white/[0.02] border-t border-white/5"
+              className="md:hidden bg-[#2d2d2d] border-t border-white/5" // Pastikan BG tidak transparan agar tidak tembus saat scroll
             >
               <div className="px-8 py-10 flex flex-col gap-8">
                 {navLinks.map((link, i) => (
@@ -105,7 +105,28 @@ export function Navbar() {
                     key={link.name}
                     href={link.href}
                     className="text-3xl font-black text-white hover:text-[#fed001] transition-colors"
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => {
+                      // 1. Cegah perilaku default anchor agar tidak lompat kasar
+                      e.preventDefault();
+
+                      // 2. Tutup menu mobile dulu
+                      setIsOpen(false);
+
+                      // 3. Ambil target ID (misal: 'about')
+                      const targetId = link.href.replace('#', '');
+                      const elem = document.getElementById(targetId);
+
+                      if (elem) {
+                        // 4. Kasih jeda 300ms (sama dengan durasi transition menu mobile)
+                        // Ini kunci agar browser mobile tidak bingung menghitung posisi
+                        setTimeout(() => {
+                          window.scrollTo({
+                            top: elem.offsetTop - 80, // 80 adalah offset agar tidak tertutup Navbar
+                            behavior: 'smooth'
+                          });
+                        }, 300);
+                      }
+                    }}
                   >
                     {link.name}
                   </motion.a>
@@ -115,6 +136,6 @@ export function Navbar() {
           )}
         </AnimatePresence>
       </nav>
-    </motion.div>
+    </motion.div >
   );
 }
