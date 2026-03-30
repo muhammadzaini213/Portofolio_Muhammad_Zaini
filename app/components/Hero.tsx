@@ -26,8 +26,7 @@ export function Hero() {
           transition={{ ...fadeInUp.transition, delay: 0.2 }}
           className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-8"
         >
-          Gameplay Systems <br className="hidden md:block" />
-          <span className="text-white">Developer</span>
+          Game Developer
         </motion.h1>
 
         <motion.p 
