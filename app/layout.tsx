@@ -15,19 +15,17 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  // Title yang muncul di tab browser
-  title: "Zaini | Gameplay Programmer & AI Systems",
-  description: "Unity Developer specializing in immersive gameplay systems and technical prototypes.",
+  title: "Zaini | Unity Gameplay Programmer & AI Systems Developer", // Diperpanjang agar tidak "Short"
+  description: "Specializing in Unity gameplay systems, advanced AI architectures, and technical design for immersive game experiences.", // Diperpanjang
 
-  // Open Graph (Untuk WhatsApp, Facebook, LinkedIn)
   openGraph: {
-    title: "Zaini | Gameplay Programmer",
-    description: "Building the next generation of gameplay systems. Check out my latest technical prototypes and projects.",
-    url: "https://zaini-portfolio.vercel.app", // Ganti dengan URL Vercel kamu nanti
+    title: "Zaini | Unity Gameplay Programmer & AI Systems",
+    description: "Building immersive gameplay systems and technical prototypes. See my latest work and technical articles.",
+    url: "https://zaini-portfolio.vercel.app", // PASTIKAN ini sama dengan domain Vercel kamu
     siteName: "Zaini Portfolio",
     images: [
       {
-        url: "/images/og-preview.png", // File ini harus ada di folder public/images/
+        url: "/images/og-preview.png", // GUNAKAN FULL URL SEPERTI INI
         width: 1200,
         height: 630,
         alt: "Zaini Portfolio Preview Logo",
@@ -36,14 +34,7 @@ export const metadata: Metadata = {
     locale: "id_ID",
     type: "website",
   },
-
-  // Twitter Card
-  twitter: {
-    card: "summary_large_image",
-    title: "Zaini | Gameplay Programmer",
-    description: "Unity Gameplay & AI Systems Developer",
-    images: ["/images/og-preview.png"], // Sama dengan OG Image
-  },
+  // ... sisanya tetap sama
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
