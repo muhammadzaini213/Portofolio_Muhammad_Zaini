@@ -2,6 +2,7 @@ import { articles } from "@/app/data/articles";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
   return articles.map((article) => ({
@@ -9,8 +10,39 @@ export async function generateStaticParams() {
   }));
 }
 
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const article = articles.find(a => a.slug === params.slug);
+  if (!article) return { title: "Article Not Found" };
+
+  return {
+    title: `${article.title} | Zaini Portfolio`,
+    description: article.desc,
+    openGraph: {
+      title: article.title,
+      description: article.desc,
+      url: `https://zaini-portofolio.vercel.app/articles/${article.slug}`,
+      images: [
+        {
+          url: "/images/og-preview.png",
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.desc,
+      images: ["/images/og-preview.png"],
+    },
+  };
+}
+
 export default async function ArticleDetail({ params }: { params: Promise<{ slug: string }> }) {
-  
+
   const { slug } = await params;
   const article = articles.find(a => a.slug === slug);
 
@@ -21,9 +53,9 @@ export default async function ArticleDetail({ params }: { params: Promise<{ slug
   return (
     <main className="min-h-screen bg-[#2d2d2d] text-white">
       <div className="max-w-7xl mx-auto px-6 pt-10 md:pt-20 pb-20">
-        
-        <Link 
-          href="/articles" 
+
+        <Link
+          href="/articles"
           className="inline-flex items-center gap-2 text-white/40 hover:text-[#fed001] transition-colors mb-12 group"
         >
           <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-1" />
@@ -63,8 +95,8 @@ export default async function ArticleDetail({ params }: { params: Promise<{ slug
               <h4 className="text-white font-bold mb-1">Enjoyed the article?</h4>
               <p className="text-white/40 text-sm">Let's discuss more about gameplay systems.</p>
             </div>
-            <Link 
-              href="/#contact" 
+            <Link
+              href="/#contact"
               className="bg-[#fed001] text-black px-6 py-3 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform"
             >
               Contact Me
