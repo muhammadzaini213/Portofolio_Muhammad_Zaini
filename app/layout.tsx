@@ -34,8 +34,14 @@ export const metadata: Metadata = {
     locale: "id_ID",
     type: "website",
   },
-  // ... sisanya tetap sama
 };
+
+metadata.twitter = {
+  card: "summary_large_image",
+  title: "Zaini | Unity Gameplay Programmer & AI Systems",
+  description: "Building immersive gameplay systems and technical prototypes.",
+  images: ["/images/og-preview.png"]
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
