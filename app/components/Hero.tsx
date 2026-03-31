@@ -16,7 +16,7 @@ export function Hero() {
         <motion.h2 
           {...fadeInUp}
           transition={{ ...fadeInUp.transition, delay: 0.1 }}
-          className="text-[#fed001] font-mono text-sm tracking-widest uppercase mb-4"
+          className="text-accent font-mono text-sm tracking-widest uppercase mb-4"
         >
           Muhammad Zaini
         </motion.h2>
@@ -45,14 +45,14 @@ export function Hero() {
         >
           <a
             href="#work"
-            className="bg-[#fed001] hover:bg-[#e5bc00] text-black px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all hover:scale-105 active:scale-95"
+            className="bg-accent hover:bg-[#e5bc00] text-black px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all hover:scale-105 active:scale-95"
           >
             View Work
           </a>
           
           <a
             href="#contact"
-            className="border border-white/20 hover:border-[#fed001] text-white px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all"
+            className="border border-white/20 hover:border-accent text-white px-8 py-4 text-sm font-bold uppercase tracking-widest transition-all"
           >
             Get In Touch
           </a>

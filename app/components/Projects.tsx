@@ -2,37 +2,39 @@
 
 import Image from "next/image";
 import { projects } from "../data/projects";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" as const },
+  },
+};
 
 export function Projects() {
-  const rest = projects.filter((p) => !p.featured);
-
-  // Varian untuk animasi kontainer (induk)
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15, // Jeda antar item
-      },
-    },
-  };
-
-  // Varian untuk animasi tiap kartu (anak)
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" as const} 
-    },
-  };
+  // Hanya tampilkan yang homeDisplay: true, max 6
+  const homeProjects = projects.filter((p) => p.homeDisplay).slice(0, 6);
+  const totalNonFeatured = projects.filter((p) => !p.featured).length;
+  const hasMore = totalNonFeatured > 6;
 
   return (
     <section id="work" className="max-w-7xl mx-auto px-6 pb-32">
-      {/* Header dengan animasi fade up sederhana */}
-      <motion.div 
+      {/* Header */}
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -46,25 +48,34 @@ export function Projects() {
             Other Projects
           </h1>
         </div>
-        <p className="text-white/40 text-sm max-w-xs md:text-right">
-          A collection of experiments, game jam entries, and technical prototypes.
-        </p>
+        <div className="flex flex-col md:items-end gap-3">
+          <p className="text-white/40 text-sm max-w-xs md:text-right">
+            A collection of experiments, game jam entries, and technical prototypes.
+          </p>
+          {hasMore && (
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 text-[#fed001] font-mono text-xs uppercase tracking-widest hover:gap-4 transition-all group"
+            >
+              <span>View All Projects</span>
+              <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          )}
+        </div>
       </motion.div>
 
-      {/* Grid dengan Stagger Animation */}
-      <motion.div 
+      {/* Grid */}
+      <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         className="grid grid-cols-1 md:grid-cols-2 gap-8"
       >
-        {rest.map((p, i) => (
+        {homeProjects.map((p, i) => (
           <motion.div key={i} variants={itemVariants}>
-            <a
-              href={p.link}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={`/projects/${p.slug}`}
               className="group relative block bg-[#2d2d2d] rounded-2xl overflow-hidden border border-white/5 transition-all duration-500 hover:border-[#fed001]/50 hover:-translate-y-2"
             >
               {/* Image Container */}
@@ -95,10 +106,28 @@ export function Projects() {
                   {p.role}
                 </p>
               </div>
-            </a>
+            </Link>
           </motion.div>
         ))}
       </motion.div>
+
+      {/* View All Button (bottom) — tampil jika ada lebih dari 6 */}
+      {hasMore && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 flex justify-center"
+        >
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-3 border border-white/10 hover:border-[#fed001]/50 px-8 py-4 rounded-full text-white hover:text-[#fed001] font-mono text-xs uppercase tracking-widest transition-all duration-300 hover:bg-[#fed001]/5"
+          >
+            <span>View All Projects</span>
+            <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
+      )}
     </section>
   );
 }

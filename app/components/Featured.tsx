@@ -4,13 +4,15 @@ import Image from "next/image";
 import { projects } from "../data/projects";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 interface Project {
+  slug: string;
   title: string;
   role: string;
   img: string;
   link: string;
-  desc?: string; 
+  desc?: string;
   featured?: boolean;
 }
 
@@ -20,7 +22,7 @@ export function Featured() {
   if (!featured) return null;
 
   return (
-    <motion.section 
+    <motion.section
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -41,10 +43,8 @@ export function Featured() {
 
 function FeaturedCard({ project }: { project: Project }) {
   return (
-    <a 
-      href={project.link} 
-      target="_blank" 
-      rel="noopener noreferrer"
+    <Link
+      href={`/projects/${project.slug}`}
       className="group block relative"
     >
       {/* Glow Effect Background */}
@@ -54,7 +54,7 @@ function FeaturedCard({ project }: { project: Project }) {
         {/* Image Side */}
         <div className="lg:col-span-3 relative aspect-video overflow-hidden rounded-2xl bg-white/5 border border-white/10 shadow-2xl">
           <Image
-            src={project.img} 
+            src={project.img}
             alt={project.title}
             fill
             priority
@@ -88,6 +88,6 @@ function FeaturedCard({ project }: { project: Project }) {
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
