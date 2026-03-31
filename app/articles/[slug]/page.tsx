@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { Metadata } from "next";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export async function generateStaticParams() {
   return articles.map((article) => ({
@@ -83,10 +85,39 @@ export default async function ArticleDetail({ params }: { params: Promise<{ slug
           </p>
         </header>
 
-        <article className="prose prose-invert prose-yellow max-w-none">
-          <p className="text-white/80 text-lg leading-relaxed whitespace-pre-line selection:bg-[#fed001] selection:text-black">
+        <article>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h1: ({ children }) => <h1 className="text-4xl font-black text-white mb-6 mt-10">{children}</h1>,
+              h2: ({ children }) => <h2 className="text-2xl font-bold text-white mb-4 mt-8">{children}</h2>,
+              h3: ({ children }) => <h3 className="text-xl font-bold text-[#fed001] mb-3 mt-6">{children}</h3>,
+              p: ({ children }) => <p className="text-white/80 text-lg leading-relaxed mb-4">{children}</p>,
+              strong: ({ children }) => <strong className="text-white font-bold">{children}</strong>,
+              em: ({ children }) => <em className="text-white/60 italic">{children}</em>,
+              ul: ({ children }) => <ul className="list-disc list-inside text-white/80 mb-4 space-y-2">{children}</ul>,
+              ol: ({ children }) => <ol className="list-decimal list-inside text-white/80 mb-4 space-y-2">{children}</ol>,
+              li: ({ children }) => <li className="text-white/80 leading-relaxed">{children}</li>,
+              blockquote: ({ children }) => (
+                <blockquote className="border-l-4 border-[#fed001] pl-6 my-6 text-white/60 italic">{children}</blockquote>
+              ),
+              code({ className, children, ...props }: any) {
+                const isBlock = className?.includes('language-');
+                return isBlock
+                  ? <pre className="bg-white/5 border border-white/10 rounded-xl p-6 overflow-x-auto mb-6 mt-4"><code className="text-white/80 text-sm font-mono">{children}</code></pre>
+                  : <code className="text-[#fed001] bg-white/10 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>{children}</code>
+              },
+              img: ({ src, alt }) => (
+                <img src={src} alt={alt} className="rounded-xl border border-white/10 w-full my-8 object-cover" />
+              ),
+              hr: () => <hr className="border-white/10 my-10" />,
+              a: ({ href, children }) => (
+                <a href={href} target="_blank" rel="noopener noreferrer" className="text-[#fed001] underline underline-offset-2 hover:text-white transition-colors">{children}</a>
+              ),
+            }}
+          >
             {article.content}
-          </p>
+          </ReactMarkdown>
         </article>
 
         <footer className="mt-20 pt-10 border-t border-white/10">
