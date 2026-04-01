@@ -110,7 +110,7 @@ export default async function ProjectDetail({
               components={{
                 h1: ({ children }) => <h1 className="text-4xl font-black text-white mb-6 mt-10">{children}</h1>,
                 h2: ({ children }) => <h2 className="text-2xl font-bold text-white mb-4 mt-8">{children}</h2>,
-                h3: ({ children }) => <h3 className="text-xl font-bold text-[#fed001] mb-3 mt-6">{children}</h3>,
+                h3: ({ children }) => <h3 className="text-xl font-bold text-white mb-3 mt-6">{children}</h3>,
                 p: ({ children }) => <p className="text-white/80 text-lg leading-relaxed mb-4">{children}</p>,
                 strong: ({ children }) => <strong className="text-white font-bold">{children}</strong>,
                 em: ({ children }) => <em className="text-white/60 italic">{children}</em>,
