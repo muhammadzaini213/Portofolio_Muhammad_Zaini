@@ -103,8 +103,9 @@ export default async function ProjectDetail({
         </div>
 
         {/* Content */}
-        <div className="grid md:grid-cols-3 gap-12 md:gap-20">
-          <article>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20">
+          {/* Artikel memakai 2 kolom (md:col-span-2) agar tidak gepeng */}
+          <article className="md:col-span-2">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -139,22 +140,20 @@ export default async function ProjectDetail({
             </ReactMarkdown>
           </article>
 
-          {/* Sidebar */}
+          {/* Sidebar tetap di 1 kolom sisanya */}
           <aside className="space-y-8">
-            <div>
+            <div className="sticky top-10"> {/* Tambahan: Biar sidebar ikut scroll (opsional) */}
               <h4 className="text-[#fed001] font-mono text-xs uppercase tracking-widest mb-3">Role</h4>
-              <p className="text-white/70 text-sm leading-relaxed">{project.role}</p>
-            </div>
+              <p className="text-white/70 text-sm leading-relaxed mb-8">{project.role}</p>
 
-            <div className="h-[1px] bg-white/10" />
+              <div className="h-[1px] bg-white/10 mb-8" />
 
-            <div>
               <h4 className="text-[#fed001] font-mono text-xs uppercase tracking-widest mb-4">Play the Game</h4>
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 bg-[#fed001] text-black px-5 py-3 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform rounded-sm"
+                className="group flex items-center justify-center gap-3 bg-[#fed001] text-black px-5 py-4 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform rounded-sm w-full"
               >
                 <span>Open on itch.io</span>
                 <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -162,7 +161,6 @@ export default async function ProjectDetail({
             </div>
           </aside>
         </div>
-
         {/* Prev / Next Navigation */}
         {(prev || next) && (
           <div className="mt-20 pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6">
