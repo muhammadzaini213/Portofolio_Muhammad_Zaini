@@ -37,8 +37,8 @@ Even though people like new things, they often crave something consistent. With 
 ### 1. LinkedIn & GitHub
 I aligned my professional profiles to ensure a seamless transition for anyone looking at my work.
 
-![Alt: Screenshot of Muhammad Zaini's LinkedIn profile showing the consistent dark theme and yellow accent colors]
-![Alt: Screenshot of Muhammad Zaini's GitHub profile showing the same visual identity and "ζ" logo]
+![Alt: Screenshot of Muhammad Zaini's LinkedIn profile showing the consistent dark theme and yellow accent colors](/images/articles/the-branding-paradox/linkedin.png)
+![Alt: Screenshot of Muhammad Zaini's GitHub profile showing the same visual identity and "ζ" logo](/images/articles/the-branding-paradox/github.png)
 
 ### 2. The Personal Portfolio
 The final destination is my website, where the branding comes together in its full form.
