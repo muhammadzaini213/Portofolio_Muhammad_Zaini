@@ -27,9 +27,9 @@ const itemVariants = {
 
 export function Projects() {
   // Hanya tampilkan yang homeDisplay: true, max 6
-  const homeProjects = projects.filter((p) => p.homeDisplay).slice(0, 6);
+  const homeProjects = projects.filter((p) => p.homeDisplay).slice(0, 4);
   const totalNonFeatured = projects.filter((p) => !p.featured).length;
-  const hasMore = totalNonFeatured > 6;
+  const hasMore = totalNonFeatured > 4;
 
   return (
     <section id="work" className="max-w-7xl mx-auto px-6 pb-32">
@@ -49,9 +49,6 @@ export function Projects() {
           </h1>
         </div>
         <div className="flex flex-col md:items-end gap-3">
-          <p className="text-white/40 text-sm max-w-xs md:text-right">
-            A collection of experiments, game jam entries, and technical prototypes.
-          </p>
           {hasMore && (
             <Link
               href="/projects"
