@@ -3,95 +3,160 @@ export const projects = [
     slug: "yappie-cleaning-service",
     title: "Yappie Cleaning Service",
     role: "Unity Programmer · UI Designer",
-    desc: "A chaotic co-op cleaning game where you manage a team of quirky robots keeping a messy household spotless.",
-    img: "/images/yappie.png",
+    desc: "A chaotic 2D top-down RPG focused on beach cleaning and environmental awareness, developed for GEMASTIK 2025.",
+    img: "/images/projects/yappie.png",
     link: "https://sleepymor.itch.io/yappie-cleaning-service",
     featured: true,
     homeDisplay: false,
     content: `
-Yappie Cleaning Service started as a game jam project with one goal: make co-op chaotic and fun.
+Originally developed for the **GEMASTIK 2025** competition, **Yappie Cleaning Service** is a 2D top-down RPG designed to blend chaotic fun with a meaningful message about environmental awareness.
 
-The core design challenge was making players feel the pressure of a messy house without the game feeling unfair. Every object spawns on a weighted random system — frequently touched areas generate more mess, so players naturally develop routes.
+The project challenged me to balance fast-paced task-based progression with an intuitive player flow. As a programmer and UI designer, I was responsible for translating complex environmental mechanics into seamless gameplay features.
 
-On the programming side, I focused on UI that communicates urgency without overwhelming. Color saturation increases as cleanliness drops. Sound pitch shifts subtly when time is running out. None of it is explained — it just feels right.
+### Key Contributions:
+* **Core Mechanics:** Designed and implemented the interactive cleaning systems, ensuring the "feel" of gathering waste was satisfying and responsive.
+* **Dynamic UI Systems:** Developed a UI that supports clarity amidst chaos, using visual cues to guide players through exploration and task-based goals.
+* **System Integration:** Bridged the gap between game design concepts and technical execution, ensuring all gameplay systems worked cohesively within the 2D RPG structure.
 
-The biggest lesson: feedback should be felt, not read.
+The core design philosophy was simple: **feedback should be felt, not just read.** By using subtle shifts in color saturation and audio pitching as cleanliness levels changed, we created an urgency that players understood instinctively.
+
+**Yappie Cleaning Service** isn't just about cleaning; it’s about making the act of environmental stewardship engaging through interactive storytelling and polished mechanics.
     `,
   },
   {
     slug: "solar-siege",
     title: "Solar Siege",
     role: "Game Designer · Unity Programmer",
-    desc: "Top-down bullet hell with performance-focused systems and procedural wave design.",
-    img: "/images/solar-siege.png",
+    desc: "A high-octane space combat bullet hell where you control a weaponized planet defending against alien invaders.",
+    img: "/images/projects/solar-siege.png",
     link: "https://lordzaini.itch.io/solar-siege",
     featured: false,
     homeDisplay: true,
     content: `
-Solar Siege is a top-down bullet hell built around one constraint: 60fps on potato hardware.
+Developed for the **Planet Game Jam**, **Solar Siege** puts a twist on the genre: you don't just fly a ship; you control **Earth Prime**, a weaponized planet defending the solar system.
 
-Every system was written with cache coherency in mind. Bullets use a flat array pool. Enemy AI runs on a simplified FSM with shared spatial hashing so raycasts are almost free.
+My dual role as Game Designer and Programmer focused on making "planetary combat" feel heavy yet responsive. I designed the core shooting systems and environmental hazards to ensure that defending against alien invaders felt like a true orbital siege.
 
-The wave system is procedural — not random. Difficulty curves are authored as data, then interpolated based on player performance metrics gathered silently during play. If you're dying too fast, the system backs off. If you're breezing through, it escalates.
+### Technical & Design Highlights:
+* **Performance First:** Built to maintain 60fps even on "potato hardware." I implemented a flat array pool for bullets and used spatial hashing for enemy AI, making intensive raycasts virtually free.
+* **Modular AI & Combat:** Designed and programmed the enemy AI and modular combat systems, allowing for diverse invader types that interact dynamically with the player.
+* **Procedural Wave Design:** Instead of pure randomness, difficulty curves are authored as data. The game silently tracks player performance, interpolating difficulty in real-time—escalating when you're winning and backing off when things get too intense.
 
-The result is a game that feels handcrafted but scales to any skill level.
+### Game Jam Synergy:
+Working in a high-pressure jam environment, I focused on building modular, parallel systems. This allowed the team to iterate on gameplay hazards and environmental interactions without breaking the core combat loop.
+
+The final result is a game that balances handcrafted tactical design with systems that scale to any skill level.
     `,
+  },
+  {
+    slug: "the-hero-is-on-the-way",
+    title: "The Hero Is On The Way",
+    role: "Game Designer · Unity Programmer · Narrative Designer",
+    desc: "A short narrative-driven game about a regular knight that protects the city while the hero is on the way to help.",
+    img: "/images/projects/thiotw.png",
+    link: "https://lordzaini.itch.io/the-hero-is-on-the-way",
+    featured: false,
+    homeDisplay: true,
+    content: `
+The Hero Is On The Way is a short-form narrative game built around one core idea: holding the line matters.
+
+Instead of playing as the hero, the player controls a regular knight tasked with defending the city while the hero is still on the way. The design intentionally shifts focus from power fantasy to responsibility under pressure.
+
+The core system revolves around two competing variables: Hero Arrival and Demon Pressure.
+
+Every action the player takes — especially calling for support — directly affects these values. Support makes survival easier, but delays the hero. Playing efficiently accelerates the hero’s arrival, but increases risk.
+
+This creates a deterministic branching system with three outcomes:
+- The hero arrives early and takes over.
+- The knight is overwhelmed and the city falls.
+- A final last stand where the knight, heavily injured, continues fighting until the very end.
+
+The final phase removes most player abilities, reducing control to movement and a single attack. This is intentional. The game shifts from mechanical mastery to emotional persistence.
+
+Dialogue is minimal and delivered through black screen typewriter text. The knight never speaks until the very end:
+“I’m sorry, Theresa… I won’t be home tonight.”
+
+No exposition, no flashbacks. Meaning is left for the player to interpret.
+
+The entire experience is designed to be completed in under 10 minutes. Not as a limitation, but as a constraint to enforce pacing, clarity, and impact within a game jam environment.
+
+The result is a tightly scoped narrative system where player decisions are small, but their consequences are absolute.
+
+Stand proud. You held the line.
+  `,
   },
   {
     slug: "deck-of-ascent",
     title: "Deck of Ascent",
     role: "Unity Programmer",
-    desc: "A roguelite deckbuilder where your choices between runs reshape the card pool permanently.",
-    img: "/images/doa.png",
-    link: "https://sleepymor.itch.io/deck-of-ascent",
+    desc: "A tactical turn-based grid strategy game that blends deckbuilding mechanics with roguelite progression.",
+    img: "/images/projects/doa.png",
+    link: "https://sleepymor.itch.io/projects/deck-of-ascent",
     featured: false,
     homeDisplay: true,
     content: `
-Deck of Ascent is a roguelite deckbuilder with a twist: cards you earn persist between runs, but so do the curses you accumulate.
+Developed for the **GIMERSIA Game Jam**, **Deck of Ascent** is a unique fusion of tactical grid-based strategy and card-driven mechanics. The challenge was to marry the spatial thinking of a board game with the unpredictable nature of a roguelite deckbuilder.
 
-The architecture centers on a serializable card state system. Every card is a ScriptableObject with modifier slots — buffs and debuffs attach as components, not hardcoded values. This made balancing significantly easier because effects could be tuned in data, not code.
+As the primary Unity Programmer, my focus was on building a robust foundation that could handle complex turn-based logic while remaining flexible enough for the rapid iteration required during a game jam.
 
-The meta-progression layer tracks player tendencies and subtly nudges card offers toward underused archetypes, encouraging experimentation without forcing it.
+### Technical Implementation:
+* **Grid & Turn Systems:** Engineered the core turn-based framework and hexagonal/grid movement logic, ensuring seamless interaction between card effects and unit positioning.
+* **Architecture:** Developed a serializable card state system using **ScriptableObjects**. This allowed for modular modifiers where buffs and debuffs were treated as components rather than hardcoded values, making real-time balancing much more efficient.
+* **Meta-Progression Logic:** Implemented a system where choices persist between runs. The game tracks player tendencies to subtly nudge card offers toward underused archetypes, encouraging tactical experimentation.
 
-Building a fair but punishing economy was the core design puzzle. The solution was making every loss feel like information, not failure.
+### Design into Function:
+The core puzzle was creating a "fair but punishing" economy. I focused on translating abstract design ideas—like accumulating curses alongside power—into functional in-game mechanics that ensure every loss feels like a learning experience rather than a failure.
+
+By building reliable, modular systems under tight constraints, we delivered a polished tactical experience that rewards both long-term planning and on-the-fly card management.
     `,
   },
   {
     slug: "4d-tic-tac-toe",
-    title: "4D Tic Tac Toe With Simultaneous Turn",
+    title: "4D Tic Tac Toe: Simultaneous Conflict",
     role: "Game Designer · Unity Programmer",
-    desc: "Tic Tac Toe expanded into four dimensions with simultaneous turns, removing analysis paralysis.",
-    img: "/images/4d-tic-tac-toe.png",
+    desc: "An experimental 4D strategy prototype featuring an 81-cell board and simultaneous turn resolution.",
+    img: "/images/projects/4d-tic-tac-toe.png",
     link: "https://lordzaini.itch.io/4d-tic-tac-toe-with-simultaneous-turn",
     featured: false,
     homeDisplay: true,
     content: `
-Classic Tic Tac Toe has a solved strategy. This project's question: what breaks that?
+Classic Tic Tac Toe is a solved game. This project was an experiment to break that certainty by expanding the board into four dimensions ($3 \times 3 \times 3 \times 3$) and replacing traditional turn order with simultaneous action.
 
-Expanding to 4D creates a board too complex to solve mentally. Adding simultaneous turns removes the ability to react — both players commit before seeing the result.
+With 81 cells to manage, the game moves away from simple pattern recognition toward high-level spatial strategy and risk management.
 
-The UI was the hardest part. Representing 4D space in 2D without losing spatial intuition required iteration. The final solution uses a 4x4 grid of 4x4 boards, color-coded by depth dimension with a subtle perspective transform to hint at the third and fourth axes.
+### Key Mechanics & Innovation:
+* **Simultaneous Commitment:** Both players lock in their moves at the same time, removing the ability to simply react to an opponent's play.
+* **Conflict Resolution:** If both players target the same cell, the game triggers a **Rock–Paper–Scissors** resolution. This introduces a layer of psychological play and uncertainty without relying on twitch reflexes. A draw in this sub-game temporarily stalls the cell, adding a tactical "lock" mechanic.
+* **Point-Based Victory:** Unlike the original game, a single line doesn't end the match. Players compete to accumulate the most points across the entire 4D space until no moves remain, forcing a focus on long-term board control.
 
-Playtesting revealed something unexpected: players developed intuition for 4D space faster than anticipated. The game works because the mind adapts.
+### The UI Challenge:
+Representing 4D space on a 2D screen without causing immediate cognitive overload was the primary hurdle. The final design uses nested grids with subtle perspective transforms and color-coding to help players develop an intuition for the extra axes.
+
+The result is a prototype where players don't just calculate moves—they adapt to a shifting, multi-dimensional battlefield where the mind learns to see patterns across dimensions faster than expected.
     `,
   },
   {
     slug: "absolute-zero",
     title: "Absolute Zero",
     role: "Game Designer",
-    desc: "A minimal puzzle game about temperature, entropy, and the cost of order.",
-    img: "/images/absolute-zero.png",
+    desc: "A tense, slow-burn survival game where light, shadow, and limited resources are your only allies.",
+    img: "/images/projects/absolute-zero.png",
     link: "https://lordzaini.itch.io/absolute-zero",
     featured: false,
     homeDisplay: true,
     content: `
-Absolute Zero is a puzzle game built on a single mechanic: heat transfer.
+In **Absolute Zero**, you aren't a hero or a soldier. You are an ordinary person with shaking hands and a revolver you barely know how to use. This project was an exercise in designing "vulnerability" rather than power.
 
-Every element on the board has a temperature. Move a cold object near a hot one — energy flows. The goal is always to reach absolute zero, but the path is never obvious.
+The core design philosophy: **combat is a last resort.** I wanted to move away from typical shooter tropes to create a tense experience where running is almost always the smarter choice.
 
-The design constraint was no UI numbers. Temperature is communicated entirely through color and particle density. Players learn the system by feel, not by reading.
+### Key Gameplay Pillars:
+* **Unstable Combat:** To simulate fear, the aiming system is intentionally difficult. Your sights sway, and while holding your breath improves accuracy, it leaves you dangerously exposed. Every bullet is a heavy decision.
+* **Light as a Mechanic:** Light and shadow are more than just visuals; they are your primary survival tools. Players must use darkness to disappear or use light beams as a tactical distraction to lure threats away.
+* **Environmental Storytelling:** Without relying on heavy UI or tutorials, the game teaches you to "read" the environment. A wrong step or a loud noise has a higher cost than a missed shot.
 
-This was an exercise in teaching through environment, not instruction. The hardest puzzles were designed last, after watching enough players fail in predictable ways. Each failure mode became a puzzle that teaches the mechanic that caused it.
+The challenge in designing **Absolute Zero** was balancing the player's frustration with tension. By emphasizing the "cost of order" through limited resources and environmental hazards, the game forces players to value survival over victory.
+
+It’s a survival game where the loudest thing in the room is your own heartbeat.
     `,
   },
 ];
