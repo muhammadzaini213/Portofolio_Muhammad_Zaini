@@ -15,7 +15,7 @@ function urlTag(loc, priority = "0.7") {
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>${priority}</priority>
-  </url>`;
+  </url>`.trim();
 }
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
