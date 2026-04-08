@@ -81,6 +81,25 @@ export function Contacts() {
               </div>
             </motion.a>
 
+            {/* Itch.io Link */}
+            <motion.a
+              variants={itemVariants}
+              href="https://lordzaini.itch.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center p-4 md:p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-[#fed001]/50 transition-all overflow-hidden"
+            >
+              <div className="flex items-center gap-3 md:gap-4 w-full">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex-shrink-0 flex items-center justify-center text-[#fed001] group-hover:bg-[#fed001] group-hover:text-black transition-colors">
+                  <Gamepad2 size={18} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-white/40 text-[9px] md:text-[10px] uppercase font-mono mb-0.5">Itch.io</p>
+                  <p className="text-white font-medium text-xs sm:text-sm md:text-base truncate">lordzaini.itch.io</p>
+                </div>
+              </div>
+            </motion.a>
+
             {/* GitHub Link */}
             <motion.a
               variants={itemVariants}
@@ -125,25 +144,6 @@ export function Contacts() {
                   <p className="text-white font-medium text-xs sm:text-sm md:text-base truncate">
                     Muhammad Zaini
                   </p>
-                </div>
-              </div>
-            </motion.a>
-
-            {/* Itch.io Link */}
-            <motion.a
-              variants={itemVariants}
-              href="https://lordzaini.itch.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center p-4 md:p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-[#fed001]/50 transition-all overflow-hidden"
-            >
-              <div className="flex items-center gap-3 md:gap-4 w-full">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex-shrink-0 flex items-center justify-center text-[#fed001] group-hover:bg-[#fed001] group-hover:text-black transition-colors">
-                  <Gamepad2 size={18} />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-white/40 text-[9px] md:text-[10px] uppercase font-mono mb-0.5">Itch.io</p>
-                  <p className="text-white font-medium text-xs sm:text-sm md:text-base truncate">lordzaini.itch.io</p>
                 </div>
               </div>
             </motion.a>
