@@ -165,7 +165,7 @@ It’s a survival game where the loudest thing in the room is your own heartbeat
     role: "Lead Programmer · Asset Artist · Audio Engineer",
     desc: "A physics-based puzzle game where you manipulate gravity to guide a fragile human through a deadly dimensional void.",
     img: "/images/projects/intern-of-the-cosmos.png", 
-    link: "https://lordzaini.io/intern-of-the-cosmos",
+    link: "https://lordzaini.itch.io/intern-of-the-cosmos",
     featured: true,
     homeDisplay: true,
     content: `
