@@ -6,7 +6,7 @@ export const projects = [
     desc: "A chaotic 2D top-down RPG focused on beach cleaning and environmental awareness, developed for GEMASTIK 2025.",
     img: "/images/projects/yappie.png",
     link: "https://sleepymor.itch.io/yappie-cleaning-service",
-    featured: true,
+    featured: false,
     homeDisplay: false,
     content: `
 Originally developed for the **GEMASTIK 2025** competition, **Yappie Cleaning Service** is a 2D top-down RPG designed to blend chaotic fun with a meaningful message about environmental awareness.
@@ -159,4 +159,34 @@ The challenge in designing **Absolute Zero** was balancing the player's frustrat
 It’s a survival game where the loudest thing in the room is your own heartbeat.
     `,
   },
+  {
+    slug: "intern-of-the-cosmos",
+    title: "Intern of the Cosmos",
+    role: "Lead Programmer · Asset Artist · Audio Engineer",
+    desc: "A physics-based puzzle game where you manipulate gravity to guide a fragile human through a deadly dimensional void.",
+    img: "/images/projects/intern-of-the-cosmos.png", 
+    link: "https://lordzaini.io/intern-of-the-cosmos",
+    featured: true,
+    homeDisplay: true,
+    content: `
+Developed for the **GDGOC Game Jam 2026**, **Intern of the Cosmos** is a "rage-quit" style physics puzzle that explores the concept of indirect control. 
+
+Instead of moving the character, you take on the role of an apprentice god who can only influence the environment by placing planets to create gravitational pulls. The challenge was to create a game that felt "slippery" and punishing, yet fair enough to keep players trying.
+
+### Key Contributions & Technical Depth:
+* **Indirect Gravity Mechanics:** Engineered a custom physics system where the player’s only interaction is through gravitational fields. I focused on the math of orbital momentum to ensure that slingshot maneuvers felt satisfyingly precise.
+* **Alien AI & Hazard Systems:** Implemented "Alien Patrol" units that use raycasting and predictive shooting. This forced the player to use gravity not just for movement, but as a defensive tool to shield the human from incoming projectiles.
+* **Technical Sound Design:** Managed the full audio pipeline, implementing a persistent audio system with high-fidelity SFX that provides crucial feedback when gravity fields are activated or when a "close call" with an alien occurs.
+
+### Design Philosophy:
+The core design focused on The Friction of Choice." By limiting the player's ability to directly save the human, every planet placement becomes a high-stakes gamble. 
+
+Working with a randomized team, we synchronized our vision to bring out 120% of our potential. The result is a prototype that balances high-difficulty spatial reasoning with the unpredictable nature of physics-driven gameplay.
+
+You aren't just an intern; you are the only thing standing between a fragile human and the cold, unforgiving laws of the universe.
+
+**Now, all three of us have brought out 120% of our true potential.**
+    `,
+  },
+
 ];
