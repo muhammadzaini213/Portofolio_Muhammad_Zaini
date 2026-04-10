@@ -7,7 +7,7 @@ export const projects = [
     img: "/images/projects/yappie.png",
     link: "https://sleepymor.itch.io/yappie-cleaning-service",
     featured: false,
-    homeDisplay: false,
+    homeDisplay: true,
     content: `
 Originally developed for the **GEMASTIK 2025** competition, **Yappie Cleaning Service** is a 2D top-down RPG designed to blend chaotic fun with a meaningful message about environmental awareness.
 
@@ -143,7 +143,7 @@ The result is a prototype where players don't just calculate moves—they adapt 
     img: "/images/projects/absolute-zero.png",
     link: "https://lordzaini.itch.io/absolute-zero",
     featured: false,
-    homeDisplay: true,
+    homeDisplay: false,
     content: `
 In **Absolute Zero**, you aren't a hero or a soldier. You are an ordinary person with shaking hands and a revolver you barely know how to use. This project was an exercise in designing "vulnerability" rather than power.
 
