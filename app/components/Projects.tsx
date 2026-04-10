@@ -27,7 +27,7 @@ const itemVariants = {
 
 export function Projects() {
   // Hanya tampilkan yang homeDisplay: true, max 6
-  const homeProjects = projects.filter((p) => p.homeDisplay).slice(0, 4);
+  const homeProjects = projects.filter((p) => p.homeDisplay).slice(0, 6);
   const totalNonFeatured = projects.filter((p) => !p.featured).length;
   const hasMore = totalNonFeatured > 6;
 
