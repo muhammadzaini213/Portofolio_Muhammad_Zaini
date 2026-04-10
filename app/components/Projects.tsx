@@ -29,7 +29,7 @@ export function Projects() {
   // Hanya tampilkan yang homeDisplay: true, max 6
   const homeProjects = projects.filter((p) => p.homeDisplay).slice(0, 4);
   const totalNonFeatured = projects.filter((p) => !p.featured).length;
-  const hasMore = totalNonFeatured > 4;
+  const hasMore = totalNonFeatured > 6;
 
   return (
     <section id="work" className="max-w-7xl mx-auto px-6 pb-32">

@@ -143,7 +143,7 @@ The result is a prototype where players don't just calculate moves—they adapt 
     img: "/images/projects/absolute-zero.png",
     link: "https://lordzaini.itch.io/absolute-zero",
     featured: false,
-    homeDisplay: false,
+    homeDisplay: true,
     content: `
 In **Absolute Zero**, you aren't a hero or a soldier. You are an ordinary person with shaking hands and a revolver you barely know how to use. This project was an exercise in designing "vulnerability" rather than power.
 
