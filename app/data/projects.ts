@@ -1,26 +1,28 @@
 export const projects = [
-  {
+{
     slug: "yappie-cleaning-service",
-    title: "Yappie Cleaning Service",
+    title: "Y.A.P.P.I.E Cleaning Service",
     role: "Unity Programmer · UI Designer",
-    desc: "A chaotic 2D top-down RPG focused on beach cleaning and environmental awareness, developed for GEMASTIK 2025.",
+    desc: "An action-packed retro pixel RPG where you control a cleaning robot to battle mutated trash monsters and restore a polluted ecosystem.",
     img: "/images/projects/yappie.png",
     link: "https://sleepymor.itch.io/yappie-cleaning-service",
     featured: false,
     homeDisplay: true,
     content: `
-Originally developed for the **GEMASTIK 2025** competition, **Yappie Cleaning Service** is a 2D top-down RPG designed to blend chaotic fun with a meaningful message about environmental awareness.
+Originally developed for the **GEMASTIK 2025** competition by **Stardust Studio**, **Y.A.P.P.I.E Cleaning Service** is a top-down Action RPG that transforms environmental conservation into an engaging combat experience. 
 
-The project challenged me to balance fast-paced task-based progression with an intuitive player flow. As a programmer and UI designer, I was responsible for translating complex environmental mechanics into seamless gameplay features.
+The game follows **Y.A.P.P.I.E** (*Your Automatic Pollution Purifier In Environment*), a robot tasked with reclaiming a coastline overrun by "The Living Garbage"—mutated waste transformed into dangerous monsters.
 
 ### Key Contributions:
-* **Core Mechanics:** Designed and implemented the interactive cleaning systems, ensuring the "feel" of gathering waste was satisfying and responsive.
-* **Dynamic UI Systems:** Developed a UI that supports clarity amidst chaos, using visual cues to guide players through exploration and task-based goals.
-* **System Integration:** Bridged the gap between game design concepts and technical execution, ensuring all gameplay systems worked cohesively within the 2D RPG structure.
+* **Hybrid Combat System:** Implemented a unique dual-weapon mechanic featuring a close-range **Net Melee** for knockbacks and a **Harpoon Hook** for pulling distant enemies, creating a strategic "pull-and-smash" gameplay loop.
+* **Environment Health System:** Developed a dynamic world-state mechanic where the environment's cleanliness directly affects gameplay. High pollution levels debuff the player and buff enemies, while cleaning areas grants "Hyperbuffs" and visual restoration.
+* **AI & Enemy Logic:** Programmed diverse enemy behaviors for various biomes, including the **Trashcan Mimic**, the stealthy **Dead Coral**, and the radioactive **Nuclear Waste Slime**.
+* **Adaptive UI/UX:** Designed a retro-inspired UI that tracks real-time environmental health and provides intuitive feedback for the robot's battery and charging states.
 
-The core design philosophy was simple: **feedback should be felt, not just read.** By using subtle shifts in color saturation and audio pitching as cleanliness levels changed, we created an urgency that players understood instinctively.
+### Gameplay Evolution:
+The project explores three distinct biomes: the **Beach**, the derelict **Floating City**, and the **Infected Coral Reefs**. Each area requires players to adapt their cleaning strategy, culminating in a final boss battle against the **Mutant Landfill Monster**.
 
-**Yappie Cleaning Service** isn't just about cleaning; it’s about making the act of environmental stewardship engaging through interactive storytelling and polished mechanics.
+**Y.A.P.P.I.E Cleaning Service** stands as a testament to how polished RPG mechanics can be used to deliver a powerful message about the urgency of our global waste crisis.
     `,
   },
   {
