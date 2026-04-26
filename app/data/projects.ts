@@ -84,6 +84,31 @@ The final result is a game that balances handcrafted tactical design with system
     `,
   },
   {
+    slug: "deck-of-ascent",
+    title: "Deck of Ascent",
+    role: "Unity Programmer",
+    desc: "A tactical turn-based grid strategy game that blends deckbuilding mechanics with roguelite progression.",
+    img: "/images/projects/doa.png",
+    link: "https://sleepymor.itch.io/projects/deck-of-ascent",
+    featured: false,
+    homeDisplay: true,
+    content: `
+Developed for the **GIMERSIA Game Jam**, **Deck of Ascent** is a unique fusion of tactical grid-based strategy and card-driven mechanics. The challenge was to marry the spatial thinking of a board game with the unpredictable nature of a roguelite deckbuilder.
+
+As the primary Unity Programmer, my focus was on building a robust foundation that could handle complex turn-based logic while remaining flexible enough for the rapid iteration required during a game jam.
+
+### Technical Implementation:
+* **Grid & Turn Systems:** Engineered the core turn-based framework and hexagonal/grid movement logic, ensuring seamless interaction between card effects and unit positioning.
+* **Architecture:** Developed a serializable card state system using **ScriptableObjects**. This allowed for modular modifiers where buffs and debuffs were treated as components rather than hardcoded values, making real-time balancing much more efficient.
+* **Meta-Progression Logic:** Implemented a system where choices persist between runs. The game tracks player tendencies to subtly nudge card offers toward underused archetypes, encouraging tactical experimentation.
+
+### Design into Function:
+The core puzzle was creating a "fair but punishing" economy. I focused on translating abstract design ideas—like accumulating curses alongside power—into functional in-game mechanics that ensure every loss feels like a learning experience rather than a failure.
+
+By building reliable, modular systems under tight constraints, we delivered a polished tactical experience that rewards both long-term planning and on-the-fly card management.
+    `,
+  },
+  {
     slug: "the-hero-is-on-the-way",
     title: "The Hero Is On The Way",
     role: "Game Designer · Unity Programmer · Narrative Designer",
@@ -121,28 +146,27 @@ Stand proud. You held the line.
   `,
   },
   {
-    slug: "deck-of-ascent",
-    title: "Deck of Ascent",
-    role: "Unity Programmer",
-    desc: "A tactical turn-based grid strategy game that blends deckbuilding mechanics with roguelite progression.",
-    img: "/images/projects/doa.png",
-    link: "https://sleepymor.itch.io/projects/deck-of-ascent",
+    slug: "absolute-zero",
+    title: "Absolute Zero",
+    role: "Game Designer",
+    desc: "A tense, slow-burn survival game where light, shadow, and limited resources are your only allies.",
+    img: "/images/projects/absolute-zero.png",
+    link: "https://lordzaini.itch.io/absolute-zero",
     featured: false,
     homeDisplay: true,
     content: `
-Developed for the **GIMERSIA Game Jam**, **Deck of Ascent** is a unique fusion of tactical grid-based strategy and card-driven mechanics. The challenge was to marry the spatial thinking of a board game with the unpredictable nature of a roguelite deckbuilder.
+In **Absolute Zero**, you aren't a hero or a soldier. You are an ordinary person with shaking hands and a revolver you barely know how to use. This project was an exercise in designing "vulnerability" rather than power.
 
-As the primary Unity Programmer, my focus was on building a robust foundation that could handle complex turn-based logic while remaining flexible enough for the rapid iteration required during a game jam.
+The core design philosophy: **combat is a last resort.** I wanted to move away from typical shooter tropes to create a tense experience where running is almost always the smarter choice.
 
-### Technical Implementation:
-* **Grid & Turn Systems:** Engineered the core turn-based framework and hexagonal/grid movement logic, ensuring seamless interaction between card effects and unit positioning.
-* **Architecture:** Developed a serializable card state system using **ScriptableObjects**. This allowed for modular modifiers where buffs and debuffs were treated as components rather than hardcoded values, making real-time balancing much more efficient.
-* **Meta-Progression Logic:** Implemented a system where choices persist between runs. The game tracks player tendencies to subtly nudge card offers toward underused archetypes, encouraging tactical experimentation.
+### Key Gameplay Pillars:
+* **Unstable Combat:** To simulate fear, the aiming system is intentionally difficult. Your sights sway, and while holding your breath improves accuracy, it leaves you dangerously exposed. Every bullet is a heavy decision.
+* **Light as a Mechanic:** Light and shadow are more than just visuals; they are your primary survival tools. Players must use darkness to disappear or use light beams as a tactical distraction to lure threats away.
+* **Environmental Storytelling:** Without relying on heavy UI or tutorials, the game teaches you to "read" the environment. A wrong step or a loud noise has a higher cost than a missed shot.
 
-### Design into Function:
-The core puzzle was creating a "fair but punishing" economy. I focused on translating abstract design ideas—like accumulating curses alongside power—into functional in-game mechanics that ensure every loss feels like a learning experience rather than a failure.
+The challenge in designing **Absolute Zero** was balancing the player's frustration with tension. By emphasizing the "cost of order" through limited resources and environmental hazards, the game forces players to value survival over victory.
 
-By building reliable, modular systems under tight constraints, we delivered a polished tactical experience that rewards both long-term planning and on-the-fly card management.
+It’s a survival game where the loudest thing in the room is your own heartbeat.
     `,
   },
   {
@@ -168,30 +192,6 @@ With 81 cells to manage, the game moves away from simple pattern recognition tow
 Representing 4D space on a 2D screen without causing immediate cognitive overload was the primary hurdle. The final design uses nested grids with subtle perspective transforms and color-coding to help players develop an intuition for the extra axes.
 
 The result is a prototype where players don't just calculate moves—they adapt to a shifting, multi-dimensional battlefield where the mind learns to see patterns across dimensions faster than expected.
-    `,
-  },
-  {
-    slug: "absolute-zero",
-    title: "Absolute Zero",
-    role: "Game Designer",
-    desc: "A tense, slow-burn survival game where light, shadow, and limited resources are your only allies.",
-    img: "/images/projects/absolute-zero.png",
-    link: "https://lordzaini.itch.io/absolute-zero",
-    featured: false,
-    homeDisplay: true,
-    content: `
-In **Absolute Zero**, you aren't a hero or a soldier. You are an ordinary person with shaking hands and a revolver you barely know how to use. This project was an exercise in designing "vulnerability" rather than power.
-
-The core design philosophy: **combat is a last resort.** I wanted to move away from typical shooter tropes to create a tense experience where running is almost always the smarter choice.
-
-### Key Gameplay Pillars:
-* **Unstable Combat:** To simulate fear, the aiming system is intentionally difficult. Your sights sway, and while holding your breath improves accuracy, it leaves you dangerously exposed. Every bullet is a heavy decision.
-* **Light as a Mechanic:** Light and shadow are more than just visuals; they are your primary survival tools. Players must use darkness to disappear or use light beams as a tactical distraction to lure threats away.
-* **Environmental Storytelling:** Without relying on heavy UI or tutorials, the game teaches you to "read" the environment. A wrong step or a loud noise has a higher cost than a missed shot.
-
-The challenge in designing **Absolute Zero** was balancing the player's frustration with tension. By emphasizing the "cost of order" through limited resources and environmental hazards, the game forces players to value survival over victory.
-
-It’s a survival game where the loudest thing in the room is your own heartbeat.
     `,
   },
   {
