@@ -1,5 +1,5 @@
 export const projects = [
-{
+  {
     slug: "yappie-cleaning-service",
     title: "Y.A.P.P.I.E Cleaning Service",
     role: "Unity Programmer · UI Designer",
@@ -23,6 +23,39 @@ The game follows **Y.A.P.P.I.E** (*Your Automatic Pollution Purifier In Environm
 The project explores three distinct biomes: the **Beach**, the derelict **Floating City**, and the **Infected Coral Reefs**. Each area requires players to adapt their cleaning strategy, culminating in a final boss battle against the **Mutant Landfill Monster**.
 
 **Y.A.P.P.I.E Cleaning Service** stands as a testament to how polished RPG mechanics can be used to deliver a powerful message about the urgency of our global waste crisis.
+    `,
+  },
+  {
+    slug: "omni-gear-protocol",
+    title: "Omni Gear Protocol",
+    role: "Game Designer · Project Manager",
+    desc: "A high-stakes physics platformer where you sacrifice your own mechanical parts to power a decaying factory — and pray you can get them back.",
+    img: "/images/projects/omni-gear-protocol.png",
+    link: "https://lordzaini.itch.io/omni-gear-protocol",
+    featured: false,
+    homeDisplay: true,
+    content: `
+**OMNI-GEAR PROTOCOL** is a high-stakes physics platformer set inside the gut of a decaying industrial complex. You play as a prototype robot — a hollow shell practically useless on its own — whose entire ability to survive depends on three specialized Cogs slotted into your back.
+
+The catch? This factory is hungry. To progress, you must sacrifice your own parts to power its ancient machinery, leaving you vulnerable, immobile, and desperate.
+
+### The Modular Life-Support
+Your abilities are not permanent — they are physical objects. Each Cog grants a core function:
+
+* **The Heavy (Large):** Grants jump capability. Without it, you are too heavy to lift your own frame.
+* **The Core (Medium):** Grants telekinetic reach. Without it, you cannot interact with distant objects.
+* **The Turbo (Small):** Grants horizontal movement. Without it, you are a sitting duck.
+
+### Sacrifice & Choice
+Every door, lift, and bridge requires a Cog to operate. The central design tension is a single recurring question: *which part of myself am I willing to leave behind?*
+
+Progressing through the factory often demands **Naked Crawls** — moments where you leave your movement or jump Cog behind to clear a path, then scramble to recall them before danger closes in. Timing the **Recall** ability adds an extra layer of risk: magnetically whistling your Cogs back may reverse the phase of active world sockets, turning your lifeline into a trap.
+
+As **Game Designer and Project Manager**, my focus was on crafting a difficulty curve that felt punishing but never unfair — where every death teaches the player something, and every escape feels genuinely earned.
+
+One chassis. Three gears. Zero margin for error.
+
+**System initialization... [START]**
     `,
   },
   {
@@ -166,7 +199,7 @@ It’s a survival game where the loudest thing in the room is your own heartbeat
     title: "Intern of the Cosmos",
     role: "Lead Programmer · Asset Artist · Audio Engineer",
     desc: "A physics-based puzzle game where you manipulate gravity to guide a fragile human through a deadly dimensional void.",
-    img: "/images/projects/intern-of-the-cosmos.png", 
+    img: "/images/projects/intern-of-the-cosmos.png",
     link: "https://lordzaini.itch.io/intern-of-the-cosmos",
     featured: true,
     homeDisplay: true,
