@@ -89,7 +89,7 @@ The final result is a game that balances handcrafted tactical design with system
     role: "Unity Programmer",
     desc: "A tactical turn-based grid strategy game that blends deckbuilding mechanics with roguelite progression.",
     img: "/images/projects/doa.png",
-    link: "https://sleepymor.itch.io/projects/deck-of-ascent",
+    link: "https://sleepymor.itch.io/deck-of-ascent",
     featured: false,
     homeDisplay: true,
     content: `
