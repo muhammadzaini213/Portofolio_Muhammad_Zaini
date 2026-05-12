@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FileText, ExternalLink, Send } from "lucide-react";
 
 export function About() {
   const fadeInUp = {
@@ -10,7 +11,7 @@ export function About() {
     viewport: { once: true },
     transition: {
       duration: 0.8,
-      ease: "easeOut" as const // Tambahkan 'as const' di sini
+      ease: "easeOut" as const
     }
   };
 
@@ -65,6 +66,8 @@ export function About() {
               "Currently focused on indie development and experimental systems design."
             </p>
           </motion.div>
+
+          
         </div>
 
       </div>

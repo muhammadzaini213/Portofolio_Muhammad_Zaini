@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { projects } from "../data/projects";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { projects } from "@/app/data/projects";
 
 interface Project {
   slug: string;

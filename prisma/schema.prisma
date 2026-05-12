@@ -1,0 +1,66 @@
+// This is your Prisma schema file
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model SiteConfig {
+  id            Int      @id @default(1)
+  heroTitle     String   @default("Game Developer")
+  heroSubtitle  String   @db.Text
+  aboutText     String   @db.Text
+  aboutSubtext  String   @db.Text
+  profileImg    String
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  role        String
+  desc        String   @db.Text
+  content     String   @db.Text // Markdown detail proyek
+  img         String
+  link        String?
+  featured    Boolean  @default(false)
+  homeDisplay Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Article {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  desc      String   @db.Text
+  content   String   @db.Text
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Profile {
+  id           Int     @id @default(1)
+  email        String  @default("gamerlemah15@gmail.com")
+  itchioUrl    String?
+  githubUrl    String?
+  linkedinUrl  String?
+  cvPdfUrl     String?
+  portfolioPdf String?
+}
+
+model SiteMetadata {
+  id              Int      @id @default(1)
+  title           String   @default("Zaini | Unity Gameplay Programmer")
+  description     String   @db.Text
+  siteUrl         String   @default("https://zaini-portfolio.vercel.app")
+  ogImage         String   // Untuk LinkedIn & FB (1200x630)
+  twitterImage    String   // Untuk Twitter (1200x600)
+  whatsappImage   String   // Untuk WA/Preview Kecil (400x400)
+  googleVerifyId  String?  @default("US1DmiDdDrZhWUkQ97WVUru06GcRG23v7WQC1p1GZh8")
+  updatedAt       DateTime @updatedAt
+}

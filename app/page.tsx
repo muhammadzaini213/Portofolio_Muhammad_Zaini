@@ -1,11 +1,13 @@
-import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { About } from "./components/About";
-import { Featured } from "./components/Featured";
-import { Articles } from "./components/Articles";
-import { Projects } from "./components/Projects";
-import { Contacts } from "./components/Contacts";
-import { Footer } from "./components/Footer";
+import { About } from '@/components/About';
+import { Articles } from '@/components/Articles';
+import { Contacts } from '@/components/Contacts';
+import { Featured } from '@/components/Featured';
+import { Footer } from '@/components/Footer';
+import { Hero } from '@/components/Hero';
+import { Navbar } from '@/components/Navbar';
+import { Projects } from '@/components/Projects';
+// import { createClient } from '@/utils/supabase/server'
+import { cookies } from 'next/headers'
 
 export default function Home() {
 
@@ -23,3 +25,4 @@ export default function Home() {
     </main>
   );
 }
+

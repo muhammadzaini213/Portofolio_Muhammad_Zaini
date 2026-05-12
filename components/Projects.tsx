@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { projects } from "../data/projects";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { projects } from "@/app/data/projects";
 
 const containerVariants = {
   hidden: { opacity: 0 },

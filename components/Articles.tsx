@@ -1,9 +1,9 @@
 "use client";
 
-import { articles } from "../data/articles";
 import Link from "next/link";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
+import { articles } from "@/app/data/articles";
 
 export function Articles() {
     const latestArticles = articles.slice(0, 4);
