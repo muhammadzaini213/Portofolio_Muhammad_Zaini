@@ -127,4 +127,7 @@ export default async function ProjectsPage() {
             ))}
           </div>
         </div>
-
+      </div>
+    </main>
+  )
+}

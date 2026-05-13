@@ -2,9 +2,9 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Save, Loader2, Upload, CheckCircle } from "lucide-react"
-import { uploadImage } from "@/lib/upload"
+import { Save, Loader2, Upload, CheckCircle, FileText } from "lucide-react"
 import { updateProfile, updateSiteConfig, updateSiteMetadata } from "./actions"
+import { uploadFile, uploadImage } from "@/lib/upload"
 
 type Tab = "hero" | "profile" | "seo"
 
@@ -127,10 +127,29 @@ export default function SettingsClient({ siteConfig, profile, siteMetadata }: Pr
   // Profile state
   const [profileLoading, setProfileLoading] = useState(false)
   const [profileSaved, setProfileSaved] = useState(false)
+  const [cvPdfUrl, setCvPdfUrl] = useState(profile?.cvPdfUrl ?? "")
+  const [cvUploading, setCvUploading] = useState(false)
+  const cvInputRef = useRef<HTMLInputElement>(null)
+  const [portfolioPdf, setPortfolioPdf] = useState(profile?.portfolioPdf ?? "")
+  const [portfolioUploading, setPortfolioUploading] = useState(false)
+  const portfolioInputRef = useRef<HTMLInputElement>(null)
 
   // SEO state
   const [seoLoading, setSeoLoading] = useState(false)
   const [seoSaved, setSeoSaved] = useState(false)
+
+  // OG Image state
+  const [ogImage, setOgImage] = useState(siteMetadata?.ogImage ?? "")
+  const [ogUploading, setOgUploading] = useState(false)
+  const ogInputRef = useRef<HTMLInputElement>(null)
+
+  const [twitterImage, setTwitterImage] = useState(siteMetadata?.twitterImage ?? "")
+  const [twitterUploading, setTwitterUploading] = useState(false)
+  const twitterInputRef = useRef<HTMLInputElement>(null)
+
+  const [whatsappImage, setWhatsappImage] = useState(siteMetadata?.whatsappImage ?? "")
+  const [whatsappUploading, setWhatsappUploading] = useState(false)
+  const whatsappInputRef = useRef<HTMLInputElement>(null)
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -143,6 +162,23 @@ export default function SettingsClient({ siteConfig, profile, siteMetadata }: Pr
       alert("Upload gagal.")
     } finally {
       setImgUploading(false)
+    }
+  }
+
+  const makeOgUploadHandler = (
+    setter: (url: string) => void,
+    setLoading: (v: boolean) => void
+  ) => async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    try {
+      setLoading(true)
+      const url = await uploadImage(file)
+      setter(url)
+    } catch {
+      alert("Upload gagal.")
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -161,6 +197,8 @@ export default function SettingsClient({ siteConfig, profile, siteMetadata }: Pr
     e.preventDefault()
     setProfileLoading(true)
     const fd = new FormData(e.currentTarget)
+    fd.set("cvPdfUrl", cvPdfUrl)
+    fd.set("portfolioPdf", portfolioPdf)
     await updateProfile(fd)
     setProfileLoading(false)
     setProfileSaved(true)
@@ -171,6 +209,9 @@ export default function SettingsClient({ siteConfig, profile, siteMetadata }: Pr
     e.preventDefault()
     setSeoLoading(true)
     const fd = new FormData(e.currentTarget)
+    fd.set("ogImage", ogImage)
+    fd.set("twitterImage", twitterImage)
+    fd.set("whatsappImage", whatsappImage)
     await updateSiteMetadata(fd)
     setSeoLoading(false)
     setSeoSaved(true)
@@ -274,10 +315,106 @@ export default function SettingsClient({ siteConfig, profile, siteMetadata }: Pr
             <InputField label="LinkedIn_URL" name="linkedinUrl" defaultValue={profile?.linkedinUrl ?? ""} placeholder="https://linkedin.com/in/yourname" />
           </div>
 
-          <div className="bg-white/[0.02] border border-white/10 p-6 space-y-5">
+          <div className="bg-white/[0.02] border border-white/10 p-6 space-y-6">
             <p className="text-[10px] text-white/30 uppercase tracking-widest font-bold border-b border-white/5 pb-3">Downloadable_Files</p>
-            <InputField label="CV_PDF_URL" name="cvPdfUrl" defaultValue={profile?.cvPdfUrl ?? ""} placeholder="https://..." hint="Direct link to your CV PDF" />
-            <InputField label="Portfolio_PDF_URL" name="portfolioPdf" defaultValue={profile?.portfolioPdf ?? ""} placeholder="https://..." hint="Direct link to your portfolio PDF" />
+
+            {/* CV PDF */}
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold block">CV_PDF</label>
+              <div className="flex items-center gap-4">
+                <div
+                  onClick={() => cvInputRef.current?.click()}
+                  className="w-16 h-16 border-2 border-dashed border-white/20 hover:border-accent/50 flex flex-col items-center justify-center cursor-pointer transition-all relative shrink-0 gap-1"
+                >
+                  {cvUploading ? (
+                    <Loader2 className="animate-spin text-accent" size={18} />
+                  ) : (
+                    <>
+                      <FileText size={18} className={cvPdfUrl ? "text-accent" : "text-white/20"} />
+                      <span className="text-[8px] text-white/30 uppercase">{cvPdfUrl ? "Change" : "Upload"}</span>
+                    </>
+                  )}
+                  <input
+                    type="file"
+                    ref={cvInputRef}
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0]
+                      if (!file) return
+                      try {
+                        setCvUploading(true)
+                        const url = await uploadFile(file)
+                        setCvPdfUrl(url)
+                      } catch { alert("Upload gagal.") }
+                      finally { setCvUploading(false) }
+                    }}
+                    className="hidden"
+                    accept=".pdf"
+                  />
+                </div>
+                <div className="flex-1">
+                  {cvPdfUrl && (
+                    <p className="text-[9px] text-accent mb-1 truncate">✓ {cvPdfUrl.split("/").pop()}</p>
+                  )}
+                  <p className="text-[9px] text-white/30 mb-1">Or paste URL directly:</p>
+                  <input
+                    type="text"
+                    value={cvPdfUrl}
+                    onChange={(e) => setCvPdfUrl(e.target.value)}
+                    placeholder="https://..."
+                    className="w-full bg-white/5 border border-white/10 p-3 text-sm focus:border-accent outline-none transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Portfolio PDF */}
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold block">Portfolio_PDF</label>
+              <div className="flex items-center gap-4">
+                <div
+                  onClick={() => portfolioInputRef.current?.click()}
+                  className="w-16 h-16 border-2 border-dashed border-white/20 hover:border-accent/50 flex flex-col items-center justify-center cursor-pointer transition-all relative shrink-0 gap-1"
+                >
+                  {portfolioUploading ? (
+                    <Loader2 className="animate-spin text-accent" size={18} />
+                  ) : (
+                    <>
+                      <FileText size={18} className={portfolioPdf ? "text-accent" : "text-white/20"} />
+                      <span className="text-[8px] text-white/30 uppercase">{portfolioPdf ? "Change" : "Upload"}</span>
+                    </>
+                  )}
+                  <input
+                    type="file"
+                    ref={portfolioInputRef}
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0]
+                      if (!file) return
+                      try {
+                        setPortfolioUploading(true)
+                        const url = await uploadFile(file)
+                        setPortfolioPdf(url)
+                      } catch { alert("Upload gagal.") }
+                      finally { setPortfolioUploading(false) }
+                    }}
+                    className="hidden"
+                    accept=".pdf"
+                  />
+                </div>
+                <div className="flex-1">
+                  {portfolioPdf && (
+                    <p className="text-[9px] text-accent mb-1 truncate">✓ {portfolioPdf.split("/").pop()}</p>
+                  )}
+                  <p className="text-[9px] text-white/30 mb-1">Or paste URL directly:</p>
+                  <input
+                    type="text"
+                    value={portfolioPdf}
+                    onChange={(e) => setPortfolioPdf(e.target.value)}
+                    placeholder="https://..."
+                    className="w-full bg-white/5 border border-white/10 p-3 text-sm focus:border-accent outline-none transition-all"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           <SaveButton loading={profileLoading} saved={profileSaved} />
@@ -295,11 +432,131 @@ export default function SettingsClient({ siteConfig, profile, siteMetadata }: Pr
             <InputField label="Google_Verify_ID" name="googleVerifyId" defaultValue={siteMetadata?.googleVerifyId ?? ""} hint="Google Search Console verification ID" />
           </div>
 
-          <div className="bg-white/[0.02] border border-white/10 p-6 space-y-5">
+          <div className="bg-white/[0.02] border border-white/10 p-6 space-y-6">
             <p className="text-[10px] text-white/30 uppercase tracking-widest font-bold border-b border-white/5 pb-3">OG_Images</p>
-            <InputField label="OG_Image (LinkedIn & FB) — 1200×630" name="ogImage" defaultValue={siteMetadata?.ogImage} placeholder="https://..." />
-            <InputField label="Twitter_Image — 1200×600" name="twitterImage" defaultValue={siteMetadata?.twitterImage} placeholder="https://..." />
-            <InputField label="WhatsApp_Image — 400×400" name="whatsappImage" defaultValue={siteMetadata?.whatsappImage} placeholder="https://..." />
+
+            {/* OG Image — LinkedIn & FB 1200×630 */}
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold block">
+                OG_Image (LinkedIn &amp; FB) — 1200×630
+              </label>
+              <div className="flex items-center gap-4">
+                <div
+                  onClick={() => ogInputRef.current?.click()}
+                  className="w-32 h-[67px] border-2 border-dashed border-white/20 hover:border-accent/50 flex items-center justify-center cursor-pointer transition-all relative overflow-hidden shrink-0"
+                >
+                  {ogImage ? (
+                    <img src={ogImage} alt="OG Preview" className="w-full h-full object-cover" />
+                  ) : (
+                    <Upload size={18} className="text-white/20" />
+                  )}
+                  {ogUploading && (
+                    <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                      <Loader2 className="animate-spin text-accent" size={16} />
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    ref={ogInputRef}
+                    onChange={makeOgUploadHandler(setOgImage, setOgUploading)}
+                    className="hidden"
+                    accept="image/*"
+                  />
+                </div>
+                <div className="flex-1">
+                  <p className="text-[9px] text-white/30 mb-1">Or paste URL directly:</p>
+                  <input
+                    type="text"
+                    value={ogImage}
+                    onChange={(e) => setOgImage(e.target.value)}
+                    placeholder="https://..."
+                    className="w-full bg-white/5 border border-white/10 p-3 text-sm focus:border-accent outline-none transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Twitter Image — 1200×600 */}
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold block">
+                Twitter_Image — 1200×600
+              </label>
+              <div className="flex items-center gap-4">
+                <div
+                  onClick={() => twitterInputRef.current?.click()}
+                  className="w-32 h-[64px] border-2 border-dashed border-white/20 hover:border-accent/50 flex items-center justify-center cursor-pointer transition-all relative overflow-hidden shrink-0"
+                >
+                  {twitterImage ? (
+                    <img src={twitterImage} alt="Twitter Preview" className="w-full h-full object-cover" />
+                  ) : (
+                    <Upload size={18} className="text-white/20" />
+                  )}
+                  {twitterUploading && (
+                    <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                      <Loader2 className="animate-spin text-accent" size={16} />
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    ref={twitterInputRef}
+                    onChange={makeOgUploadHandler(setTwitterImage, setTwitterUploading)}
+                    className="hidden"
+                    accept="image/*"
+                  />
+                </div>
+                <div className="flex-1">
+                  <p className="text-[9px] text-white/30 mb-1">Or paste URL directly:</p>
+                  <input
+                    type="text"
+                    value={twitterImage}
+                    onChange={(e) => setTwitterImage(e.target.value)}
+                    placeholder="https://..."
+                    className="w-full bg-white/5 border border-white/10 p-3 text-sm focus:border-accent outline-none transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* WhatsApp Image — 400×400 */}
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold block">
+                WhatsApp_Image — 400×400
+              </label>
+              <div className="flex items-center gap-4">
+                <div
+                  onClick={() => whatsappInputRef.current?.click()}
+                  className="w-16 h-16 border-2 border-dashed border-white/20 hover:border-accent/50 flex items-center justify-center cursor-pointer transition-all relative overflow-hidden shrink-0"
+                >
+                  {whatsappImage ? (
+                    <img src={whatsappImage} alt="WhatsApp Preview" className="w-full h-full object-cover" />
+                  ) : (
+                    <Upload size={18} className="text-white/20" />
+                  )}
+                  {whatsappUploading && (
+                    <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                      <Loader2 className="animate-spin text-accent" size={16} />
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    ref={whatsappInputRef}
+                    onChange={makeOgUploadHandler(setWhatsappImage, setWhatsappUploading)}
+                    className="hidden"
+                    accept="image/*"
+                  />
+                </div>
+                <div className="flex-1">
+                  <p className="text-[9px] text-white/30 mb-1">Or paste URL directly:</p>
+                  <input
+                    type="text"
+                    value={whatsappImage}
+                    onChange={(e) => setWhatsappImage(e.target.value)}
+                    placeholder="https://..."
+                    className="w-full bg-white/5 border border-white/10 p-3 text-sm focus:border-accent outline-none transition-all"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           <SaveButton loading={seoLoading} saved={seoSaved} />

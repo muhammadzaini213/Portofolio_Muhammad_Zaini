@@ -15,9 +15,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const project = await prisma.project.findUnique({ where: { slug: params.slug } });
+  const { slug } = await params
+  const project = await prisma.project.findUnique({ where: { slug } });
   if (!project) return { title: "Project Not Found" };
 
   return {

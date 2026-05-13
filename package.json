@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "generate-sitemap": "node scripts/generate-sitemap.cjs",
-    "build": "npm run generate-sitemap && next build",
+    "build": "npm run next build",
     "start": "next start",
     "lint": "eslint"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@adminjs/prisma": "^5.0.4",
@@ -45,6 +47,7 @@
     "eslint-config-next": "16.2.1",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }

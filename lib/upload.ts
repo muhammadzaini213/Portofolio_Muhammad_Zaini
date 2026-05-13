@@ -21,6 +21,25 @@ export async function uploadImage(file: File): Promise<string> {
   return data.publicUrl
 }
 
+export async function uploadFile(file: File): Promise<string> {
+  const supabase = createClient()
+
+  const ext = file.name.split(".").pop()
+  const filename = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+  const path = `files/${filename}`
+
+  const { error } = await supabase.storage.from(BUCKET).upload(path, file, {
+    cacheControl: "3600",
+    upsert: false,
+    contentType: file.type,
+  })
+
+  if (error) throw new Error(error.message)
+
+  const { data } = supabase.storage.from(BUCKET).getPublicUrl(path)
+  return data.publicUrl
+}
+
 export async function deleteImage(url: string): Promise<void> {
   const supabase = createClient()
 

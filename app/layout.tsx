@@ -1,6 +1,7 @@
 import { Bebas_Neue, Poppins } from 'next/font/google';
 import './globals.css';
 import { Metadata } from 'next';
+import { prisma } from '@/lib/prisma';
 
 const bebas = Bebas_Neue({
   weight: '400',
@@ -14,33 +15,55 @@ const poppins = Poppins({
   variable: '--font-poppins'
 });
 
-export const metadata: Metadata = {
-  title: "Zaini | Unity Gameplay Programmer & AI Systems Developer", // Diperpanjang agar tidak "Short"
-  description: "Specializing in Unity gameplay systems, advanced AI architectures, and technical design for immersive game experiences.", // Diperpanjang
+// Fallback jika database belum diisi
+const FALLBACK = {
+  title: "Zaini | Unity Gameplay Programmer & AI Systems Developer",
+  description: "Specializing in Unity gameplay systems, advanced AI architectures, and technical design for immersive game experiences.",
+  siteUrl: "https://zaini-portfolio.vercel.app",
+  ogImage: "/images/og-preview.png",
+  twitterImage: "/images/og-preview.png",
+  googleVerifyId: "US1DmiDdDrZhWUkQ97WVUru06GcRG23v7WQC1p1GZh8",
+}
 
-  openGraph: {
-    title: "Zaini | Unity Gameplay Programmer & AI Systems",
-    description: "Building immersive gameplay systems and technical prototypes. See my latest work and technical articles.",
-    url: "https://zaini-portfolio.vercel.app", // PASTIKAN ini sama dengan domain Vercel kamu
-    siteName: "Zaini Portfolio",
-    images: [
-      {
-        url: "/images/og-preview.png", // GUNAKAN FULL URL SEPERTI INI
-        width: 1200,
-        height: 630,
-        alt: "Zaini Portfolio Preview Logo",
-      },
-    ],
-    locale: "id_ID",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await prisma.siteMetadata.findUnique({ where: { id: 1 } })
 
-metadata.twitter = {
-  card: "summary_large_image",
-  title: "Zaini | Unity Gameplay Programmer & AI Systems",
-  description: "Building immersive gameplay systems and technical prototypes.",
-  images: ["/images/og-preview.png"]
+  const title = meta?.title || FALLBACK.title
+  const description = meta?.description || FALLBACK.description
+  const siteUrl = meta?.siteUrl || FALLBACK.siteUrl
+  const ogImage = meta?.ogImage || FALLBACK.ogImage
+  const twitterImage = meta?.twitterImage || FALLBACK.twitterImage
+  const googleVerifyId = meta?.googleVerifyId || FALLBACK.googleVerifyId
+
+  return {
+    title,
+    description,
+    verification: {
+      google: googleVerifyId,
+    },
+    openGraph: {
+      title,
+      description,
+      url: siteUrl,
+      siteName: "Zaini Portfolio",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: "Zaini Portfolio Preview",
+        },
+      ],
+      locale: "id_ID",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [twitterImage],
+    },
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -51,7 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/site.webmanifest" />
-      <meta name="google-site-verification" content="US1DmiDdDrZhWUkQ97WVUru06GcRG23v7WQC1p1GZh8" />
       <body className="bg-primary text-white font-poppins">{children}</body>
     </html>
   );
