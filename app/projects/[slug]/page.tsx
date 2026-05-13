@@ -94,41 +94,10 @@ export default async function ProjectDetail({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20">
-          <article className="md:col-span-2">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              components={{
-                h1: ({ children }) => <h1 className="text-4xl font-black text-white mb-6 mt-10">{children}</h1>,
-                h2: ({ children }) => <h2 className="text-2xl font-bold text-white mb-4 mt-8">{children}</h2>,
-                h3: ({ children }) => <h3 className="text-xl font-bold text-white mb-3 mt-6">{children}</h3>,
-                p: ({ children }) => <p className="text-white/80 text-lg leading-relaxed mb-4">{children}</p>,
-                strong: ({ children }) => <strong className="text-white font-bold">{children}</strong>,
-                em: ({ children }) => <em className="text-white/60 italic">{children}</em>,
-                ul: ({ children }) => <ul className="list-disc list-inside text-white/80 mb-4 space-y-2">{children}</ul>,
-                ol: ({ children }) => <ol className="list-decimal list-inside text-white/80 mb-4 space-y-2">{children}</ol>,
-                li: ({ children }) => <li className="text-white/80 leading-relaxed">{children}</li>,
-                blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-[#fed001] pl-6 my-6 text-white/60 italic">{children}</blockquote>
-                ),
-                code({ className, children, ...props }: any) {
-                  const isBlock = className?.includes('language-');
-                  return isBlock
-                    ? <pre className="bg-white/5 border border-white/10 rounded-xl p-6 overflow-x-auto mb-6 mt-4"><code className="text-white/80 text-sm font-mono">{children}</code></pre>
-                    : <code className="text-[#fed001] bg-white/10 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>{children}</code>
-                },
-                img: ({ src, alt }) => (
-                  <img src={src} alt={alt} className="rounded-xl border border-white/10 w-full my-8 object-cover" />
-                ),
-                hr: () => <hr className="border-white/10 my-10" />,
-                a: ({ href, children }) => (
-                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-[#fed001] underline underline-offset-2 hover:text-white transition-colors">{children}</a>
-                ),
-              }}
-            >
-              {project.content}
-            </ReactMarkdown>
-          </article>
-
+          <article
+            className="md:col-span-2 prose-content"
+            dangerouslySetInnerHTML={{ __html: project.content }}
+          />
           <aside className="space-y-8">
             <div className="sticky top-10">
               <h4 className="text-[#fed001] font-mono text-xs uppercase tracking-widest mb-3">Role</h4>
