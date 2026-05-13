@@ -1,8 +1,13 @@
-import { articles } from "../data/articles";
+import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-export default function ArticlesPage() {
+export default async function ArticlesPage() {
+  const articles = await prisma.article.findMany({
+    where: { published: true },
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
     <main className="min-h-screen bg-[#2d2d2d] text-white">
       <div className="max-w-7xl mx-auto px-6 pt-12 md:pt-20 pb-20">
@@ -29,9 +34,12 @@ export default function ArticlesPage() {
         </header>
 
         <div className="grid gap-0">
+          {articles.length === 0 && (
+            <p className="text-white/30 font-mono text-sm">No articles published yet.</p>
+          )}
           {articles.map((a) => (
             <Link 
-              key={a.slug} 
+              key={a.id} 
               href={`/articles/${a.slug}`} 
               className="group block"
             >

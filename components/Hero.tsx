@@ -2,12 +2,28 @@
 
 import { motion } from "framer-motion";
 
-export function Hero() {
+interface SiteConfig {
+  heroTitle: string;
+  heroSubtitle: string;
+  aboutText: string;
+  aboutSubtext: string;
+  profileImg: string;
+}
+
+interface HeroProps {
+  siteConfig: SiteConfig | null;
+}
+
+export function Hero({ siteConfig }: HeroProps) {
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6, ease: "easeOut" as const }
   };
+
+  // Fallback ke nilai default jika database belum diisi
+  const heroTitle = siteConfig?.heroTitle ?? "Game Developer";
+  const heroSubtitle = siteConfig?.heroSubtitle ?? "Building scalable gameplay systems, AI behavior, and technical architecture focused on iteration speed and clarity.";
 
   return (
     <section className="max-w-7xl mx-auto px-6 pt-40 pb-24 md:pt-32 md:pb-32">
@@ -26,7 +42,7 @@ export function Hero() {
           transition={{ ...fadeInUp.transition, delay: 0.2 }}
           className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-8"
         >
-          Game Developer
+          {heroTitle}
         </motion.h1>
 
         <motion.p 
@@ -34,8 +50,7 @@ export function Hero() {
           transition={{ ...fadeInUp.transition, delay: 0.3 }}
           className="text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed mb-10"
         >
-          Building scalable gameplay systems, AI behavior, and technical architecture
-          focused on <span className="text-white">iteration speed</span> and <span className="text-white">clarity</span>.
+          {heroSubtitle}
         </motion.p>
 
         <motion.div 

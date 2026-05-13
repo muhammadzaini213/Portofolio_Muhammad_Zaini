@@ -4,7 +4,29 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FileText, ExternalLink, Send } from "lucide-react";
 
-export function About() {
+interface SiteConfig {
+  heroTitle: string;
+  heroSubtitle: string;
+  aboutText: string;
+  aboutSubtext: string;
+  profileImg: string;
+}
+
+interface Profile {
+  email: string;
+  itchioUrl: string | null;
+  githubUrl: string | null;
+  linkedinUrl: string | null;
+  cvPdfUrl: string | null;
+  portfolioPdf: string | null;
+}
+
+interface AboutProps {
+  siteConfig: SiteConfig | null;
+  profile: Profile | null;
+}
+
+export function About({ siteConfig, profile }: AboutProps) {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -15,11 +37,17 @@ export function About() {
     }
   };
 
+  const aboutText = siteConfig?.aboutText ?? "I focus on designing gameplay systems that are modular, reusable, and easy to expand. My work centers around AI behavior (FSM, HFSM, GOAP), performance optimization, and building clean technical structures.";
+  const aboutSubtext = siteConfig?.aboutSubtext ?? "Currently focused on indie development and experimental systems design.";
+  const profileImg = siteConfig?.profileImg ?? "/images/profile.png";
+  const cvUrl = profile?.cvPdfUrl ?? "/cv-muhammad-zaini.pdf";
+  const portfolioUrl = profile?.portfolioPdf ?? profile?.itchioUrl ?? "https://lordzaini.itch.io";
+
   return (
     <section id="about" className="max-w-7xl mx-auto px-6 pb-32 pt-10">
       <div className="flex flex-col md:flex-row items-center gap-10 md:gap-20">
 
-        {/* Gambar Profil dengan Efek Float */}
+        {/* Gambar Profil */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -29,7 +57,7 @@ export function About() {
         >
           <div className="absolute inset-0 rounded-full translate-x-3 translate-y-3" />
           <Image
-            src="/images/profile.png"
+            src={profileImg}
             alt="Profile"
             fill
             priority
@@ -52,9 +80,7 @@ export function About() {
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
             className="text-white/90 text-lg md:text-xl leading-relaxed mb-8"
           >
-            I focus on designing gameplay systems that are modular, reusable,
-            and easy to expand. My work centers around <span className="text-[#fed001]">AI behavior</span> (FSM, HFSM, GOAP),
-            performance optimization, and building clean technical structures.
+            {aboutText}
           </motion.p>
 
           <motion.div
@@ -63,11 +89,9 @@ export function About() {
             className="bg-white/5 border-l-4 border-[#fed001] p-6 rounded-r-2xl"
           >
             <p className="text-white/60 text-sm md:text-base italic leading-relaxed">
-              "Currently focused on indie development and experimental systems design."
+              &ldquo;{aboutSubtext}&rdquo;
             </p>
           </motion.div>
-
-          
         </div>
 
       </div>

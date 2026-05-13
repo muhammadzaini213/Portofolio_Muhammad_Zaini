@@ -26,35 +26,18 @@ const LinkedInIcon = () => (
   </svg>
 );
 
-const CONTACT_LINKS = [
-  {
-    label: "Email",
-    value: "gamerlemah15@gmail.com",
-    href: "mailto:gamerlemah15@gmail.com",
-    icon: <Mail size={18} />,
-  },
-  {
-    label: "Itch.io",
-    value: "lordzaini.itch.io",
-    href: "https://lordzaini.itch.io",
-    icon: <Gamepad2 size={18} />,
-    external: true,
-  },
-  {
-    label: "GitHub",
-    value: "muhammadzaini213",
-    href: "https://github.com/muhammadzaini213",
-    icon: <GitHubIcon />,
-    external: true,
-  },
-  {
-    label: "LinkedIn",
-    value: "Muhammad Zaini",
-    href: "https://www.linkedin.com/in/muhammad-zaini-a8582b306",
-    icon: <LinkedInIcon />,
-    external: true,
-  },
-];
+interface Profile {
+  email: string;
+  itchioUrl: string | null;
+  githubUrl: string | null;
+  linkedinUrl: string | null;
+  cvPdfUrl: string | null;
+  portfolioPdf: string | null;
+}
+
+interface ContactsProps {
+  profile: Profile | null;
+}
 
 const containerVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -74,7 +57,45 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
-export function Contacts() {
+export function Contacts({ profile }: ContactsProps) {
+  const email = profile?.email ?? "gamerlemah15@gmail.com";
+  const itchioUrl = profile?.itchioUrl ?? "https://lordzaini.itch.io";
+  const githubUrl = profile?.githubUrl ?? "https://github.com/muhammadzaini213";
+  const linkedinUrl = profile?.linkedinUrl ?? "https://www.linkedin.com/in/muhammad-zaini-a8582b306";
+  const cvPdfUrl = profile?.cvPdfUrl ?? "/cv-muhammad-zaini.pdf";
+  const portfolioPdf = profile?.portfolioPdf ?? itchioUrl;
+
+  const CONTACT_LINKS = [
+    {
+      label: "Email",
+      value: email,
+      href: `mailto:${email}`,
+      icon: <Mail size={18} />,
+      external: false,
+    },
+    {
+      label: "Itch.io",
+      value: itchioUrl.replace("https://", ""),
+      href: itchioUrl,
+      icon: <Gamepad2 size={18} />,
+      external: true,
+    },
+    {
+      label: "GitHub",
+      value: githubUrl.replace("https://github.com/", ""),
+      href: githubUrl,
+      icon: <GitHubIcon />,
+      external: true,
+    },
+    {
+      label: "LinkedIn",
+      value: "Muhammad Zaini",
+      href: linkedinUrl,
+      icon: <LinkedInIcon />,
+      external: true,
+    },
+  ];
+
   return (
     <section id="contact" className="max-w-7xl mx-auto px-6 pb-32">
       <motion.div
@@ -112,7 +133,7 @@ export function Contacts() {
 
             <div className="flex w-full max-w-sm flex-col gap-3 mx-auto md:mx-0">
               <a
-                href="mailto:gamerlemah15@gmail.com"
+                href={`mailto:${email}`}
                 className="flex items-center justify-center gap-3 rounded-full bg-[#fed001] px-8 py-4 text-xs md:text-sm font-bold uppercase tracking-widest text-black transition-all hover:bg-[#e5bc00] hover:scale-[1.02] active:scale-95"
               >
                 <Send size={18} />
@@ -121,7 +142,7 @@ export function Contacts() {
 
               <div className="grid grid-cols-2 gap-3">
                 <a
-                  href="/cv-muhammad-zaini.pdf"
+                  href={cvPdfUrl}
                   download
                   className="group flex items-center justify-center gap-2 rounded-full border border-white/15 py-3.5 text-white/50 transition-all hover:border-[#fed001]/60 hover:text-[#fed001] active:scale-95"
                 >
@@ -132,7 +153,7 @@ export function Contacts() {
                 </a>
 
                 <a
-                  href="https://lordzaini.itch.io"
+                  href={portfolioPdf}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center justify-center gap-2 rounded-full border border-white/15 py-3.5 text-white/50 transition-all hover:border-[#fed001]/60 hover:text-[#fed001] active:scale-95"
@@ -146,7 +167,7 @@ export function Contacts() {
             </div>
           </motion.div>
 
-          {/* RIGHT (ENLARGED VERSION) */}
+          {/* RIGHT */}
           <div className="grid w-full gap-3">
             {CONTACT_LINKS.map(({ label, value, href, icon, external }) => (
               <motion.a
@@ -157,7 +178,6 @@ export function Contacts() {
                 aria-label={`${label}: ${value}`}
                 className="group flex items-center overflow-hidden rounded-xl border border-white/5 bg-white/[0.04] px-5 py-4 md:px-6 md:py-5 transition-all hover:border-[#fed001]/40 hover:bg-white/[0.07]"
               >
-                {/* Icon (bigger) */}
                 <div
                   aria-hidden="true"
                   className="mr-4 flex h-10 w-10 md:h-11 md:w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/5 text-[#fed001] transition-colors group-hover:bg-[#fed001] group-hover:text-black"
@@ -165,7 +185,6 @@ export function Contacts() {
                   {icon}
                 </div>
 
-                {/* Text (bigger) */}
                 <div className="min-w-0 flex-1">
                   <p className="mb-1 font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-white/30">
                     {label}
@@ -175,7 +194,6 @@ export function Contacts() {
                   </p>
                 </div>
 
-                {/* Arrow */}
                 <ExternalLink
                   size={14}
                   aria-hidden="true"

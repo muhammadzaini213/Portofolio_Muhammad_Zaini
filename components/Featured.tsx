@@ -4,19 +4,26 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { projects } from "@/app/data/projects";
 
 interface Project {
+  id: string;
   slug: string;
   title: string;
   role: string;
   img: string;
-  link: string;
-  desc?: string;
-  featured?: boolean;
+  link: string | null;
+  desc: string;
+  featured: boolean;
+  homeDisplay: boolean;
+  content: string;
+  createdAt: Date;
 }
 
-export function Featured() {
+interface FeaturedProps {
+  projects: Project[];
+}
+
+export function Featured({ projects }: FeaturedProps) {
   const featured = projects.find((p) => p.featured);
 
   if (!featured) return null;

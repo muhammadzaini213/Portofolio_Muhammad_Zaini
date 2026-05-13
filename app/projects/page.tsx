@@ -1,4 +1,4 @@
-import { projects } from "../data/projects";
+import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
@@ -9,7 +9,11 @@ export const metadata: Metadata = {
   description: "A complete archive of game development projects — bullet hells, deckbuilders, puzzle games, and more.",
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await prisma.project.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
   const featured = projects.filter((p) => p.featured);
   const rest = projects.filter((p) => !p.featured);
 
@@ -47,7 +51,7 @@ export default function ProjectsPage() {
             <div className="grid gap-6">
               {featured.map((p) => (
                 <Link
-                  key={p.slug}
+                  key={p.id}
                   href={`/projects/${p.slug}`}
                   className="group relative block bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-[#fed001]/50 transition-all duration-500"
                 >
@@ -92,7 +96,7 @@ export default function ProjectsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {rest.map((p) => (
               <Link
-                key={p.slug}
+                key={p.id}
                 href={`/projects/${p.slug}`}
                 className="group block bg-white/5 rounded-2xl overflow-hidden border border-white/5 hover:border-[#fed001]/50 transition-all duration-500 hover:-translate-y-1"
               >
@@ -124,7 +128,3 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-      </div>
-    </main>
-  );
-}

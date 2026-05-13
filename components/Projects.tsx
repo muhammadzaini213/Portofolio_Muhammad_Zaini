@@ -4,7 +4,24 @@ import Image from "next/image";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { projects } from "@/app/data/projects";
+
+interface Project {
+  id: string;
+  slug: string;
+  title: string;
+  role: string;
+  img: string;
+  link: string | null;
+  desc: string;
+  featured: boolean;
+  homeDisplay: boolean;
+  content: string;
+  createdAt: Date;
+}
+
+interface ProjectsProps {
+  projects: Project[];
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,7 +42,7 @@ const itemVariants = {
   },
 };
 
-export function Projects() {
+export function Projects({ projects }: ProjectsProps) {
   // Hanya tampilkan yang homeDisplay: true, max 6
   const homeProjects = projects.filter((p) => p.homeDisplay).slice(0, 6);
   const totalNonFeatured = projects.filter((p) => !p.featured).length;
@@ -70,7 +87,7 @@ export function Projects() {
         className="grid grid-cols-1 md:grid-cols-2 gap-8"
       >
         {homeProjects.map((p, i) => (
-          <motion.div key={i} variants={itemVariants}>
+          <motion.div key={p.id} variants={itemVariants}>
             <Link
               href={`/projects/${p.slug}`}
               className="group relative block bg-[#2d2d2d] rounded-2xl overflow-hidden border border-white/5 transition-all duration-500 hover:border-[#fed001]/50 hover:-translate-y-2"
@@ -108,7 +125,7 @@ export function Projects() {
         ))}
       </motion.div>
 
-      {/* View All Button (bottom) — tampil jika ada lebih dari 6 */}
+      {/* View All Button (bottom) */}
       {hasMore && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
