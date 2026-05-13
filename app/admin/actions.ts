@@ -1,18 +1,14 @@
 "use server"
-
-import { prisma } from "@/lib/prisma"
-import { revalidatePath } from "next/cache"
-
-export async function updateProject(id: string, formData: any) {
-  await prisma.project.update({
-    where: { id },
-    data: formData,
-  })
-  revalidatePath("/admin/projects")
-  revalidatePath("/")
-}
-
-export async function createProject(formData: any) {
-  await prisma.project.create({ data: formData })
-  revalidatePath("/admin/projects")
-}
+// app/admin/actions.ts — file ini tidak lagi digunakan secara langsung.
+// Semua server actions sudah dipindah ke file masing-masing:
+//
+//   Projects:
+//     create  → app/admin/projects/new/actions.ts
+//     update  → app/admin/projects/[id]/actions.ts
+//     delete  → app/admin/projects/[id]/actions.ts
+//
+//   Articles:
+//     create/update/delete → app/admin/articles/actions.ts
+//
+//   Settings:
+//     → app/admin/settings/actions.ts

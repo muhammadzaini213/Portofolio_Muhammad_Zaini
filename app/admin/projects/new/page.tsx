@@ -1,4 +1,3 @@
-// app/admin/projects/new/page.tsx
 "use client"
 
 import { useState, useRef } from "react"
@@ -7,7 +6,7 @@ import Link from "next/link"
 import dynamic from "next/dynamic"
 import { ChevronLeft, Save, Upload, Loader2 } from "lucide-react"
 import { uploadImage } from "@/lib/upload"
-import { createProject } from "../actions"
+import { createProject } from "./actions"  // ✅ FIX: was "../actions" → file tidak ada
 
 const Editor = dynamic(() => import("@/components/admin/Editor"), {
   ssr: false,
@@ -30,7 +29,7 @@ export default function NewProjectPage() {
       setIsUploading(true)
       const url = await uploadImage(file)
       setCoverUrl(url)
-    } catch (err) {
+    } catch {
       alert("Gagal mengupload cover image.")
     } finally {
       setIsUploading(false)
@@ -46,7 +45,6 @@ export default function NewProjectPage() {
 
     try {
       await createProject(formData, content)
-      // ✅ redirect di sini, bukan di server action
       router.push("/admin/projects")
       router.refresh()
     } catch (err: any) {

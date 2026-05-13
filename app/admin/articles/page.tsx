@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { formatDistanceToNow } from "date-fns"
+import ArticleRowActions from "./ArticleRowActions"
 
 export default async function ArticlesAdmin() {
   const articles = await prisma.article.findMany({ orderBy: { updatedAt: "desc" } })
@@ -11,7 +12,9 @@ export default async function ArticlesAdmin() {
       <div className="flex justify-between items-start mb-8">
         <div>
           <h2 className="text-accent text-[10px] tracking-[0.4em] uppercase mb-2 font-bold">Content_Log</h2>
-          <h1 className="text-4xl font-black">ARTICLES_LOG<span className="text-accent animate-pulse">_</span></h1>
+          <h1 className="text-4xl font-black">
+            ARTICLES_LOG<span className="text-accent animate-pulse">_</span>
+          </h1>
         </div>
         <Link
           href="/admin/articles/new"
@@ -24,7 +27,8 @@ export default async function ArticlesAdmin() {
       <div className="bg-white/[0.02] border border-white/10">
         <div className="p-4 border-b border-white/5">
           <span className="text-[9px] text-white/30 uppercase tracking-widest">
-            {articles.length} record{articles.length !== 1 ? "s" : ""} — {articles.filter((a) => a.published).length} published
+            {articles.length} record{articles.length !== 1 ? "s" : ""} —{" "}
+            {articles.filter((a) => a.published).length} published
           </span>
         </div>
         <table className="w-full border-collapse">
@@ -67,12 +71,7 @@ export default async function ArticlesAdmin() {
                   {formatDistanceToNow(new Date(a.updatedAt), { addSuffix: true })}
                 </td>
                 <td className="p-4">
-                  <Link
-                    href={`/admin/articles/${a.id}`}
-                    className="text-[10px] border border-accent/30 text-accent hover:bg-accent hover:text-black px-3 py-1.5 transition-all uppercase tracking-widest font-bold"
-                  >
-                    Edit
-                  </Link>
+                  <ArticleRowActions id={a.id} />
                 </td>
               </tr>
             ))}

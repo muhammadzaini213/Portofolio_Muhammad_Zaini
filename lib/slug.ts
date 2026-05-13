@@ -1,44 +1,47 @@
 // lib/slug.ts
-import { prisma } from "@/lib/prisma"
+import { prisma } from "./prisma"
 
-/**
- * Generate slug dari title, lalu pastikan unik di tabel yang diberikan.
- * Jika sudah ada (dan bukan milik ID yang sama), tambahkan suffix -2, -3, dst.
- */
-export function toSlug(title: string): string {
-  return title
+function toSlug(text: string): string {
+  return text
     .toLowerCase()
     .trim()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/(^-|-$)/g, "")
+    .replace(/[^\w\s-]/g, "")   // hapus karakter spesial
+    .replace(/[\s_-]+/g, "-")   // spasi/underscore → dash
+    .replace(/^-+|-+$/g, "")    // trim dash di awal/akhir
 }
 
-export async function uniqueProjectSlug(title: string, excludeId?: string): Promise<string> {
+/**
+ * Generate slug unik untuk Project.
+ * Jika slug sudah ada, tambahkan suffix angka: my-project-2, my-project-3, dst.
+ * @param title  - judul project baru
+ * @param skipId - id project yang sedang diedit (agar tidak bentrok dengan dirinya sendiri)
+ */
+export async function uniqueProjectSlug(title: string, skipId?: string): Promise<string> {
   const base = toSlug(title)
   let slug = base
   let counter = 2
 
   while (true) {
     const existing = await prisma.project.findUnique({ where: { slug } })
-    if (!existing || existing.id === excludeId) break
+    // Tidak ada konflik, atau konflik hanya dengan project yang sedang diedit
+    if (!existing || existing.id === skipId) return slug
     slug = `${base}-${counter++}`
   }
-
-  return slug
 }
 
-export async function uniqueArticleSlug(title: string, excludeId?: string): Promise<string> {
+/**
+ * Generate slug unik untuk Article.
+ * @param title  - judul artikel baru
+ * @param skipId - id artikel yang sedang diedit
+ */
+export async function uniqueArticleSlug(title: string, skipId?: string): Promise<string> {
   const base = toSlug(title)
   let slug = base
   let counter = 2
 
   while (true) {
     const existing = await prisma.article.findUnique({ where: { slug } })
-    if (!existing || existing.id === excludeId) break
+    if (!existing || existing.id === skipId) return slug
     slug = `${base}-${counter++}`
   }
-
-  return slug
 }
