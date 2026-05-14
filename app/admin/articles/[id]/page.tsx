@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic' // Taruh di baris paling atas
+
 import { prisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import EditArticleClient from "./EditArticleClient"
