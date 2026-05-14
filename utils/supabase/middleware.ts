@@ -36,12 +36,12 @@ export async function middleware(request: NextRequest) {
     // Cek apakah user ada dan punya role admin di app_metadata
     const isAdmin = user?.app_metadata?.role === "admin";
 
-    if (!isAdmin) {
-      // Jika bukan admin, tendang ke halaman login
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      return NextResponse.redirect(url);
-    }
+    // if (!isAdmin) {
+    //   // Jika bukan admin, tendang ke halaman login
+    //   const url = request.nextUrl.clone();
+    //   url.pathname = "/login";
+    //   return NextResponse.redirect(url);
+    // }
   }
 
   return supabaseResponse;
