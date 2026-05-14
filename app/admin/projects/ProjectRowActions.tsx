@@ -2,7 +2,6 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { Loader2, Trash2 } from "lucide-react"
 import { deleteProject } from "./[id]/actions"
 import { useRouter } from "next/navigation"
@@ -15,7 +14,6 @@ export default function ProjectRowActions({ id }: { id: string }) {
   const handleDelete = async () => {
     if (!confirmDelete) {
       setConfirmDelete(true)
-      // Auto-reset confirm after 3 detik jika tidak di-klik
       setTimeout(() => setConfirmDelete(false), 3000)
       return
     }
@@ -32,12 +30,12 @@ export default function ProjectRowActions({ id }: { id: string }) {
 
   return (
     <div className="flex items-center gap-2">
-      <Link
+      <a
         href={`/admin/projects/${id}`}
         className="text-[10px] border border-accent/30 text-accent hover:bg-accent hover:text-black px-3 py-1.5 transition-all uppercase tracking-widest font-bold"
       >
         Edit
-      </Link>
+      </a>
 
       <button
         onClick={handleDelete}
