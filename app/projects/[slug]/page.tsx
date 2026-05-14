@@ -1,4 +1,4 @@
-import { projects } from "@/app/data/projects";
+import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,17 +8,17 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 export async function generateStaticParams() {
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
+  const projects = await prisma.project.findMany({ select: { slug: true } });
+  return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const project = projects.find((p) => p.slug === params.slug);
+  const { slug } = await params
+  const project = await prisma.project.findUnique({ where: { slug } });
   if (!project) return { title: "Project Not Found" };
 
   return {
@@ -28,14 +28,7 @@ export async function generateMetadata({
       title: project.title,
       description: project.desc,
       url: `https://zaini-portofolio.vercel.app/projects/${project.slug}`,
-      images: [
-        {
-          url: project.img,
-          width: 1200,
-          height: 630,
-          alt: project.title,
-        },
-      ],
+      images: [{ url: project.img, width: 1200, height: 630, alt: project.title }],
       type: "article",
     },
     twitter: {
@@ -53,22 +46,22 @@ export default async function ProjectDetail({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
 
-  if (!project) {
-    return notFound();
-  }
+  const [project, allProjects] = await Promise.all([
+    prisma.project.findUnique({ where: { slug } }),
+    prisma.project.findMany({ orderBy: { createdAt: "desc" }, select: { slug: true, title: true } }),
+  ]);
 
-  // Previous / next navigation
-  const currentIndex = projects.findIndex((p) => p.slug === slug);
-  const prev = projects[currentIndex - 1] ?? null;
-  const next = projects[currentIndex + 1] ?? null;
+  if (!project) return notFound();
+
+  const currentIndex = allProjects.findIndex((p) => p.slug === slug);
+  const prev = allProjects[currentIndex - 1] ?? null;
+  const next = allProjects[currentIndex + 1] ?? null;
 
   return (
     <main className="min-h-screen bg-[#2d2d2d] text-white">
       <div className="max-w-7xl mx-auto px-6 pt-10 md:pt-20 pb-20">
 
-        {/* Back */}
         <Link
           href="/projects"
           className="inline-flex items-center gap-2 text-white/40 hover:text-[#fed001] transition-colors mb-12 group"
@@ -77,7 +70,6 @@ export default async function ProjectDetail({
           <span className="font-mono text-xs uppercase tracking-widest">Back to Projects</span>
         </Link>
 
-        {/* Header */}
         <header className="mb-10 md:mb-16 border-b border-white/10 pb-10 md:pb-14">
           <p className="text-[#fed001] font-mono text-xs uppercase tracking-widest mb-4">
             {project.role}
@@ -90,7 +82,6 @@ export default async function ProjectDetail({
           </p>
         </header>
 
-        {/* Hero Image */}
         <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 mb-12 md:mb-20 bg-white/5">
           <Image
             src={project.img}
@@ -102,66 +93,36 @@ export default async function ProjectDetail({
           />
         </div>
 
-        {/* Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20">
-          {/* Artikel memakai 2 kolom (md:col-span-2) agar tidak gepeng */}
-          <article className="md:col-span-2">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              components={{
-                h1: ({ children }) => <h1 className="text-4xl font-black text-white mb-6 mt-10">{children}</h1>,
-                h2: ({ children }) => <h2 className="text-2xl font-bold text-white mb-4 mt-8">{children}</h2>,
-                h3: ({ children }) => <h3 className="text-xl font-bold text-white mb-3 mt-6">{children}</h3>,
-                p: ({ children }) => <p className="text-white/80 text-lg leading-relaxed mb-4">{children}</p>,
-                strong: ({ children }) => <strong className="text-white font-bold">{children}</strong>,
-                em: ({ children }) => <em className="text-white/60 italic">{children}</em>,
-                ul: ({ children }) => <ul className="list-disc list-inside text-white/80 mb-4 space-y-2">{children}</ul>,
-                ol: ({ children }) => <ol className="list-decimal list-inside text-white/80 mb-4 space-y-2">{children}</ol>,
-                li: ({ children }) => <li className="text-white/80 leading-relaxed">{children}</li>,
-                blockquote: ({ children }) => (
-                  <blockquote className="border-l-4 border-[#fed001] pl-6 my-6 text-white/60 italic">{children}</blockquote>
-                ),
-                code({ className, children, ...props }: any) {
-                  const isBlock = className?.includes('language-');
-                  return isBlock
-                    ? <pre className="bg-white/5 border border-white/10 rounded-xl p-6 overflow-x-auto mb-6 mt-4"><code className="text-white/80 text-sm font-mono">{children}</code></pre>
-                    : <code className="text-[#fed001] bg-white/10 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>{children}</code>
-                },
-                img: ({ src, alt }) => (
-                  <img src={src} alt={alt} className="rounded-xl border border-white/10 w-full my-8 object-cover" />
-                ),
-                hr: () => <hr className="border-white/10 my-10" />,
-                a: ({ href, children }) => (
-                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-[#fed001] underline underline-offset-2 hover:text-white transition-colors">{children}</a>
-                ),
-              }}
-            >
-              {project.content}
-            </ReactMarkdown>
-          </article>
-
-          {/* Sidebar tetap di 1 kolom sisanya */}
+          <article
+            className="md:col-span-2 prose-content"
+            dangerouslySetInnerHTML={{ __html: project.content }}
+          />
           <aside className="space-y-8">
-            <div className="sticky top-10"> {/* Tambahan: Biar sidebar ikut scroll (opsional) */}
+            <div className="sticky top-10">
               <h4 className="text-[#fed001] font-mono text-xs uppercase tracking-widest mb-3">Role</h4>
               <p className="text-white/70 text-sm leading-relaxed mb-8">{project.role}</p>
 
               <div className="h-[1px] bg-white/10 mb-8" />
 
-              <h4 className="text-[#fed001] font-mono text-xs uppercase tracking-widest mb-4">Play the Game</h4>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-center gap-3 bg-[#fed001] text-black px-5 py-4 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform rounded-sm w-full"
-              >
-                <span>Open on itch.io</span>
-                <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+              {project.link && (
+                <>
+                  <h4 className="text-[#fed001] font-mono text-xs uppercase tracking-widest mb-4">Play the Game</h4>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-center gap-3 bg-[#fed001] text-black px-5 py-4 text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform rounded-sm w-full"
+                  >
+                    <span>Open on itch.io</span>
+                    <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                </>
+              )}
             </div>
           </aside>
         </div>
-        {/* Prev / Next Navigation */}
+
         {(prev || next) && (
           <div className="mt-20 pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6">
             {prev ? (
@@ -176,9 +137,7 @@ export default async function ProjectDetail({
                   {prev.title}
                 </span>
               </Link>
-            ) : (
-              <div />
-            )}
+            ) : <div />}
 
             {next ? (
               <Link
@@ -192,13 +151,10 @@ export default async function ProjectDetail({
                   {next.title}
                 </span>
               </Link>
-            ) : (
-              <div />
-            )}
+            ) : <div />}
           </div>
         )}
 
-        {/* Footer CTA */}
         <footer className="mt-10 pt-10 border-t border-white/10">
           <div className="bg-white/5 p-8 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
