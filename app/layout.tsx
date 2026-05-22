@@ -2,6 +2,7 @@ import { Bebas_Neue, Poppins } from 'next/font/google';
 import './globals.css';
 import { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
+import { Analytics } from '@vercel/analytics/next';
 
 const bebas = Bebas_Neue({
   weight: '400',
@@ -74,7 +75,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="manifest" href="/site.webmanifest" />
-      <body className="bg-primary text-white font-poppins">{children}</body>
+      <body className="bg-primary text-white font-poppins">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
