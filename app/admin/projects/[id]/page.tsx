@@ -13,14 +13,14 @@ export async function generateStaticParams() {
 export default async function EditProjectPage({
   params,
 }: {
-  params: { slug: string };
+  params: { id: string };
 }) {
-  const { slug } = params;
+  const { id } = params;
 
-  if (!slug) notFound();
+  if (!id) notFound();
 
   const project = await prisma.project.findUnique({
-    where: { slug },
+    where: { id },
   });
 
   if (!project) notFound();

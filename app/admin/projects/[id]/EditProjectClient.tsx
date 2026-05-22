@@ -79,8 +79,8 @@ export default function EditProjectClient({ project }: { project: Project }) {
         return;
       }
 
-      router.push("/admin/projects");
       router.refresh();
+      router.push("/admin/projects");
     } catch (err) {
       console.error(err);
       alert("Terjadi kesalahan saat menyimpan.");

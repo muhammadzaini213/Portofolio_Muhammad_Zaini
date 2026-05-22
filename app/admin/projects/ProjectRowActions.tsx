@@ -3,7 +3,7 @@
 
 import { useState } from "react"
 import { Loader2, Trash2 } from "lucide-react"
-import { deleteProject } from "./[slug]/actions"
+import { deleteProject } from "./[id]/actions"
 import { useRouter } from "next/navigation"
 
 export default function ProjectRowActions({ id }: { id: string }) {

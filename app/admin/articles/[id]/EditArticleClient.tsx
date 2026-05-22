@@ -36,8 +36,8 @@ export default function EditArticleClient({ article }: { article: Article }) {
     const formData = new FormData(e.currentTarget)
     try {
       await updateArticle(article.id, formData, content)
-      router.push("/admin/articles")
       router.refresh()
+      router.push("/admin/articles")
     } catch {
       alert("Gagal menyimpan artikel.")
     } finally {
@@ -50,8 +50,8 @@ export default function EditArticleClient({ article }: { article: Article }) {
     setIsDeleting(true)
     try {
       await deleteArticle(article.id)
-      router.push("/admin/articles")
       router.refresh()
+      router.push("/admin/articles")
     } catch {
       alert("Gagal menghapus artikel.")
       setIsDeleting(false)

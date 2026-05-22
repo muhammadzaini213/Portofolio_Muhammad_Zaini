@@ -45,6 +45,7 @@ export async function updateArticle(id: string, formData: FormData, content: str
   revalidatePath("/admin/articles")
   revalidatePath("/articles")
   revalidatePath(`/articles/${slug}`)
+  revalidatePath("/admin/articles/[id]", "page")
 }
 
 export async function deleteArticle(id: string) {
