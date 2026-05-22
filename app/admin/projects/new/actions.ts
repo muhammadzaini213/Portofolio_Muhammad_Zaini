@@ -26,6 +26,7 @@ export async function createProject(formData: FormData, content: string) {
   })
 
   revalidatePath("/admin/projects")
+  revalidatePath("/admin/projects/[id]", "page")
   revalidatePath("/")
   // Jangan redirect() di sini — lempar ke client agar try/catch tidak menangkap NEXT_REDIRECT
 }
