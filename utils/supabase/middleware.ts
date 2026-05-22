@@ -17,15 +17,15 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          );
           supabaseResponse = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
+            request,
           });
-
-          cookiesToSet.forEach(({ name, value, options }) => {
-            supabaseResponse.cookies.set(name, value, options);
-          });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          );
         },
       },
     }
@@ -52,6 +52,20 @@ export async function middleware(request: NextRequest) {
       url.pathname = "/";
       return NextResponse.redirect(url);
     }
+  }
+
+  // Catch-all: rewrite unknown routes to not-found page
+  const validRoutes = ["/", "/projects", "/articles", "/login"];
+  const isDynamicRoute =
+    pathname.startsWith("/projects/") ||
+    pathname.startsWith("/articles/") ||
+    pathname.startsWith("/admin/") ||
+    pathname.startsWith("/api/");
+
+  if (!isAdminRoute && !isDynamicRoute && !validRoutes.includes(pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/_not-found";
+    return NextResponse.rewrite(url);
   }
 
   return supabaseResponse;
