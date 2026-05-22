@@ -6,7 +6,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { ChevronLeft, Save, Upload, Loader2, Trash2 } from "lucide-react";
 import { uploadImage } from "@/lib/upload";
-import { deleteProject, updateProject } from "./actions";
+import { ActionResult, deleteProject, updateProject } from "./actions";
 
 const Editor = dynamic(() => import("@/components/admin/Editor"), {
   ssr: false,
@@ -68,15 +68,16 @@ export default function EditProjectClient({ project }: { project: Project }) {
     try {
       const formData = new FormData(e.currentTarget);
 
-      const res = await updateProject(project.id, formData, content);
+      const res: ActionResult = await updateProject(
+        project.id,
+        formData,
+        content
+      );
 
-      if (!res?.success) {
-        alert(res?.message || "Gagal menyimpan perubahan.");
-        setIsSubmitting(false);
+      if (!res.success) {
+        alert(res.message || "Gagal menyimpan perubahan.");
         return;
       }
-
-      await new Promise((r) => setTimeout(r, 100));
 
       router.push("/admin/projects");
       router.refresh();
@@ -87,7 +88,7 @@ export default function EditProjectClient({ project }: { project: Project }) {
       setIsSubmitting(false);
     }
   };
-
+  
   const handleDelete = async () => {
     if (!confirmDelete) {
       setConfirmDelete(true);
@@ -97,21 +98,19 @@ export default function EditProjectClient({ project }: { project: Project }) {
     setIsDeleting(true);
 
     try {
-      const res = await deleteProject(project.id);
+      const res: ActionResult = await deleteProject(project.id);
 
-      if (!res?.success) {
-        alert(res?.message || "Gagal menghapus proyek.");
-        setIsDeleting(false);
+      if (!res.success) {
+        alert(res.message || "Gagal menghapus proyek.");
         return;
       }
-
-      await new Promise((r) => setTimeout(r, 100));
 
       router.push("/admin/projects");
       router.refresh();
     } catch (err) {
       console.error(err);
       alert("Terjadi kesalahan saat menghapus.");
+    } finally {
       setIsDeleting(false);
     }
   };
@@ -143,11 +142,10 @@ export default function EditProjectClient({ project }: { project: Project }) {
             type="button"
             onClick={handleDelete}
             disabled={isDeleting}
-            className={`flex items-center gap-2 px-4 py-2 text-[10px] uppercase tracking-widest font-bold border transition-all disabled:opacity-40 ${
-              confirmDelete
-                ? "border-red-500 bg-red-500 text-white"
-                : "border-red-500/30 text-red-400/60 hover:border-red-500 hover:text-red-400"
-            }`}
+            className={`flex items-center gap-2 px-4 py-2 text-[10px] uppercase tracking-widest font-bold border transition-all disabled:opacity-40 ${confirmDelete
+              ? "border-red-500 bg-red-500 text-white"
+              : "border-red-500/30 text-red-400/60 hover:border-red-500 hover:text-red-400"
+              }`}
           >
             {isDeleting ? (
               <Loader2 className="animate-spin" size={14} />
