@@ -201,32 +201,91 @@ export default function EditProjectClient({ project }: { project: Project }) {
         </div>
 
         {/* Form fields */}
-        <div className="grid md:grid-cols-2 gap-8 bg-white/[0.02] border border-white/10 p-8">
-          <input name="title" defaultValue={project.title} />
-          <input name="role" defaultValue={project.role} />
-          <input name="link" defaultValue={project.link ?? ""} />
-          <textarea name="desc" defaultValue={project.desc} rows={6} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white/[0.02] border border-white/10 p-8">
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Project_Name</label>
+              <input
+                name="title"
+                required
+                defaultValue={project.title}
+                className="w-full bg-white/5 border border-white/10 p-4 text-sm focus:border-accent outline-none transition-all"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Developer_Role</label>
+              <input
+                name="role"
+                required
+                defaultValue={project.role}
+                className="w-full bg-white/5 border border-white/10 p-4 text-sm focus:border-accent outline-none transition-all"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold">External_Link (Optional)</label>
+              <input
+                name="link"
+                defaultValue={project.link ?? ""}
+                className="w-full bg-white/5 border border-white/10 p-4 text-sm focus:border-accent outline-none transition-all"
+                placeholder="https://itch.io/project-demo"
+              />
+            </div>
+          </div>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Quick_Summary</label>
+              <textarea
+                name="desc"
+                required
+                rows={8}
+                defaultValue={project.desc}
+                className="w-full bg-white/5 border border-white/10 p-4 text-sm focus:border-accent outline-none transition-all resize-none"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Editor */}
-        <div className="bg-white/[0.02] border border-white/10 p-8">
+        <div className="space-y-2 bg-white/[0.02] border border-white/10 p-8">
+          <div className="flex justify-between items-center mb-4">
+            <label className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Project_Documentation</label>
+            <span className="text-[9px] text-accent/50 uppercase tracking-tighter italic">Rich_Text_Editor</span>
+          </div>
           <Editor value={content} onChange={setContent} />
+        </div>
+
+        {/* Flags */}
+        <div className="flex flex-wrap items-center gap-8 p-6 bg-white/[0.02] border border-white/10">
+          <label className="flex items-center gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              name="homeDisplay"
+              defaultChecked={project.homeDisplay}
+              className="w-4 h-4 accent-accent"
+            />
+            <span className="text-[10px] text-white/40 group-hover:text-white transition-colors uppercase font-bold tracking-widest">Display_on_Frontpage</span>
+          </label>
+          <label className="flex items-center gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              name="featured"
+              defaultChecked={project.featured}
+              className="w-4 h-4 accent-accent"
+            />
+            <span className="text-[10px] text-white/40 group-hover:text-white transition-colors uppercase font-bold tracking-widest">Mark_as_Featured</span>
+          </label>
         </div>
 
         {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting || isUploading}
-          className="w-full bg-accent text-black font-bold py-5"
+          className="w-full bg-accent hover:bg-white text-black font-black py-6 flex items-center justify-center gap-4 transition-all disabled:opacity-30 uppercase text-sm tracking-[0.3em] shadow-[0_0_20px_rgba(254,208,1,0.15)] hover:shadow-[0_0_30px_rgba(254,208,1,0.3)]"
         >
           {isSubmitting ? (
-            <>
-              <Loader2 className="animate-spin inline" /> SAVING...
-            </>
+            <><Loader2 className="animate-spin" size={20} /> SAVING_CHANGES...</>
           ) : (
-            <>
-              <Save /> SAVE_CHANGES
-            </>
+            <><Save size={20} /> SAVE_CHANGES</>
           )}
         </button>
       </form>
