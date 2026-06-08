@@ -9,9 +9,9 @@ export const dynamicParams = true;
 export default async function EditProjectPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { id } = params;
+  const { slug: id } = await params;
 
   if (!id) notFound();
 
