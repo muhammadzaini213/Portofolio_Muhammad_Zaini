@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 export type ActionResult = {
   success: boolean;
@@ -21,7 +22,7 @@ export async function updateProject(
     const featured = formData.get("featured") === "on";
     const homeDisplay = formData.get("homeDisplay") === "on";
 
-    await prisma.project.update({
+    const project = await prisma.project.update({
       where: { id },
       data: {
         title,
@@ -34,6 +35,12 @@ export async function updateProject(
         homeDisplay,
       },
     });
+
+    revalidatePath("/admin/projects");
+    revalidatePath("/admin/projects/[slug]", "page");
+    revalidatePath(`/projects/${project.slug}`);
+    revalidatePath("/projects");
+    revalidatePath("/");
 
     return {
       success: true,
@@ -53,6 +60,10 @@ export async function deleteProject(id: string): Promise<ActionResult> {
     await prisma.project.delete({
       where: { id },
     });
+
+    revalidatePath("/admin/projects");
+    revalidatePath("/projects");
+    revalidatePath("/");
 
     return {
       success: true,
